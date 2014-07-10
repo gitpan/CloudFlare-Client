@@ -1,0 +1,19 @@
+Changes
+lib/CloudFlare/Client.pm
+lib/CloudFlare/Client/Types.pm
+lib/CloudFlare/Client/Exception/Upstream.pm
+lib/CloudFlare/Client/Exception/Connection.pm
+Makefile.PL
+MANIFEST			This list of files
+README
+t/00-load.t
+t/manifest.t
+t/pod-coverage.t
+t/pod.t
+t/boilerplate.t
+t/Exception-Upstream.t
+t/Exception-Connection.t
+t/Types.t
+t/usage.t
+META.yml                                 Module YAML meta-data (added by MakeMaker)
+META.json                                Module JSON meta-data (added by MakeMaker)
