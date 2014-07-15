@@ -28,10 +28,10 @@ has_attribute_ok($CLASS, 'status',
 Readonly my $MSG => 'Doesn\'t Matter';
 try {
     new_ok($CLASS => [
-	       message   => $MSG,
-	       status => 404 ],
-	   "construction with status"
-	);
+               message   => $MSG,
+               status => 404 ],
+           "construction with status"
+        );
 } finally {
     Readonly my $ee => shift;
     is($ee, undef,"construction with status no exception");
@@ -39,13 +39,13 @@ try {
 # No status
 try {
     new_ok($CLASS => [ message => $MSG ],
-	   "construction with no status"
-	);
+           "construction with no status"
+        );
 } finally {
     Readonly my $ee => shift;
     is($ee, undef,"construction with no status no exception");
 };
-# Missing message                                          
+# Missing message
 try {
     new $CLASS;
 } finally {
@@ -58,12 +58,12 @@ try { new $CLASS(message => $MSG, extra => 'arg') }
 finally {
     Readonly my $e => shift;
     isa_ok($e, 'Moose::Exception::Legacy',
-	   'construction with extra attribute exception');
+           'construction with extra attribute exception');
 };
 
 # More moose tests
 my $e = try {
     new $CLASS(
-	message => $MSG
-	)};
+        message => $MSG
+        )};
 meta_ok($e);

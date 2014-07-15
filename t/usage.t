@@ -18,15 +18,15 @@ for my $attr (qw/ _user _key _ua/) {
 }
 
 # Construction
-# Valid arguments 
+# Valid arguments
 Readonly my $USER => 'blah';
 Readonly my $KEY  => 'blah';
 try {
     new_ok($CLASS, [
-	       user    => $USER,
-	       apikey  => $KEY
-	   ],
-	   'construction with valid credentials');
+               user    => $USER,
+               apikey  => $KEY
+           ],
+           'construction with valid credentials');
 } finally {
     Readonly my $e => shift;
     is($e, undef, "construction with valid credentials no exception");
@@ -40,26 +40,26 @@ sub _checkEType {
     diag($e) unless isa_ok($e, $eClass, $tstName)
 }
 # Missing user
-Readonly my $MISS_ARG_E => 
+Readonly my $MISS_ARG_E =>
     'Moose::Exception::AttributeIsRequired';
 try { new $CLASS(apikey => $KEY) } finally {
     _checkEType(shift, $MISS_ARG_E,
-	   "construction with missing user attribute exception")};
+           "construction with missing user attribute exception")};
 # Missing apikey
 try { new $CLASS(user => $USER) } finally {
     _checkEType(shift, $MISS_ARG_E,
-	   "construction with missing apikey attribute exception")};
+           "construction with missing apikey attribute exception")};
 # Extra attr
 try { new $CLASS(user   => $USER,
-		 apikey => $KEY,
-		 extra  => 'arg') } finally {
-		     _checkEType(shift, 'Moose::Exception::Legacy',
-				 "construction with extra attribute exception")};
+                 apikey => $KEY,
+                 extra  => 'arg') } finally {
+                     _checkEType(shift, 'Moose::Exception::Legacy',
+                                 "construction with extra attribute exception")};
 
 # More moose tests
 Readonly my $api => try { new $CLASS(
-			      user    => $USER,
-			      apikey  => $KEY)};
+                              user    => $USER,
+                              apikey  => $KEY)};
 meta_ok($api);
 
 # methods - check for failure upstream
@@ -101,9 +101,9 @@ Readonly my %tstSpec => (
     recLoadAll    => [[ $ZONE ]],
     zoneCheck     => [[ $ZONE ], [ $ZONE, $ZONE ]],
     zoneIps       => [[ $ZONE ],
-		      [ $ZONE, hours => $HOURS ],
-		      [ $ZONE, class => $REC_CLASS ],
-		      [ $ZONE, geo => $GEO ]],
+                      [ $ZONE, hours => $HOURS ],
+                      [ $ZONE, class => $REC_CLASS ],
+                      [ $ZONE, geo => $GEO ]],
     ipLkup        => [[ $IP ]],
     zoneSettings  => [[ $ZONE ]],
     secLvl        => [[ $ZONE, $SEC_LVL ]],
@@ -119,25 +119,24 @@ Readonly my %tstSpec => (
     async         => [[ $ZONE, $MINI_VAL ]],
     mirage2       => [[ $ZONE, $MIR_VAL ]],
     recNew        => [[ $ZONE, 'A', $REC_NAME, $IP, $TTL ],
-		      [ $ZONE, 'CNAME', $REC_NAME, $ZONE, $TTL ],
-		      [ $ZONE, 'MX', $REC_NAME, $ZONE, $TTL, 
-			prio => $PRIO ],
-		      [ $ZONE, 'TXT', $REC_NAME, $ZONE, $TTL ],
-		      [ $ZONE, 'SPF', $REC_NAME, $ZONE, $TTL ],
-		      [ $ZONE, 'AAAA', $REC_NAME, $IP6, $TTL ],
-		      [ $ZONE, 'NS', $REC_NAME, $IP, $TTL ],
-		      [ $ZONE, 'SRV', $REC_NAME, $IP, $TTL,
-			prio => $PRIO,
-			srvname => $SRVC_NAME,
-			protocol => $PROTO,
-			weight => $WGHT,
-			port => $PORT,
-			target => $TRGT ],
-		      [ $ZONE, 'LOC', $REC_NAME, $IP, $TTL ]],
+                      [ $ZONE, 'CNAME', $REC_NAME, $ZONE, $TTL ],
+                      [ $ZONE, 'MX', $REC_NAME, $ZONE, $TTL,
+                        prio => $PRIO ],
+                      [ $ZONE, 'TXT', $REC_NAME, $ZONE, $TTL ],
+                      [ $ZONE, 'SPF', $REC_NAME, $ZONE, $TTL ],
+                      [ $ZONE, 'AAAA', $REC_NAME, $IP6, $TTL ],
+                      [ $ZONE, 'NS', $REC_NAME, $IP, $TTL ],
+                      [ $ZONE, 'SRV', $REC_NAME, $IP, $TTL,
+                        prio => $PRIO,
+                        srvname => $SRVC_NAME,
+                        protocol => $PROTO,
+                        weight => $WGHT,
+                        port => $PORT,
+                        target => $TRGT ],
+                      [ $ZONE, 'LOC', $REC_NAME, $IP, $TTL ]],
     recDelete     => [[ $ZONE, $REC_ID ]]
 );
 for my $method ( sort keys %tstSpec ) {
     for my $args (@{ $tstSpec{$method} }) {
-	try { $api->$method(@$args) } finally {
-	    _checkEType(shift, $UPSTRM_E, $method)}}}
-
+        try { $api->$method(@$args) } finally {
+            _checkEType(shift, $UPSTRM_E, $method)}}}

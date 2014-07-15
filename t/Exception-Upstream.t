@@ -28,10 +28,10 @@ has_attribute_ok($CLASS, 'errorCode',
 Readonly my $MSG => 'Doesn\'t Matter';
 try {
     new_ok($CLASS => [
-	       message   => $MSG,
-	       errorCode => 'E_MAXAPI' ],
-	   "construction with valid EC"
-	);
+               message   => $MSG,
+               errorCode => 'E_MAXAPI' ],
+           "construction with valid EC"
+        );
 } finally {
     Readonly my $ee => shift;
     is($ee, undef,"construction with valid EC no exception");
@@ -39,8 +39,8 @@ try {
 # No error code
 try {
     new_ok($CLASS => [ message => $MSG ],
-	   "construction with no EC"
-	);
+           "construction with no EC"
+        );
 } finally {
     Readonly my $ee => shift;
     is($ee, undef,"construction with no EC no exception");
@@ -48,15 +48,15 @@ try {
 # Invalid error code
 try {
     new $CLASS(
-	message   => $MSG,
-	errorCode => 'E_NOTSPECD'
-	);
+        message   => $MSG,
+        errorCode => 'E_NOTSPECD'
+        );
 } finally {
     Readonly my $ee => shift;
-    isa_ok($ee, 'Moose::Exception::ValidationFailedForInlineTypeConstraint', 
-	   'construction with invalid EC exception');
+    isa_ok($ee, 'Moose::Exception::ValidationFailedForInlineTypeConstraint',
+           'construction with invalid EC exception');
 };
-# Missing message                                          
+# Missing message
 try {
     new $CLASS;
 } finally {
@@ -69,14 +69,13 @@ try { new $CLASS(message => $MSG, extra => 'arg') }
 finally {
     Readonly my $e => shift;
     isa_ok($e, 'Moose::Exception::Legacy',
-	   'construction with extra attribute exception');
+           'construction with extra attribute exception');
 };
 
 # More moose tests
 my $e = try {
     new $CLASS(
-	message => $MSG
-	);
+        message => $MSG
+        );
 };
 meta_ok($e);
-

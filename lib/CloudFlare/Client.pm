@@ -1,6 +1,7 @@
 package CloudFlare::Client;
+# ABSTRACT: Object Orientated Interface to Cloudflare client API
 
-use Modern::Perl '2014';
+use Modern::Perl '2012';
 use autodie ':all';
 
 use Readonly;
@@ -15,7 +16,7 @@ use CloudFlare::Client::Exception::Upstream;
 use LWP::UserAgent;
 use JSON::Any;
 
-Readonly our $VERSION => '0.01';
+our $VERSION = '0.02'; # VERSION
 
 # Read only attributes
 # Cloudflare credentials
@@ -31,7 +32,8 @@ has '_key' => (
     required => 1,
     init_arg => 'apikey'
     );
-Readonly my $UA_STRING => "CloudFlare::Client/$VERSION";
+Readonly my $UA_STRING =>
+    "CloudFlare::Client/$CloudFlare::Client::VERSION";
 has '_ua' => (
     is       => 'ro',
     default  => sub {
@@ -46,36 +48,36 @@ has '_ua' => (
 Readonly my $CF_URL =>
     'https://www.cloudflare.com/api_json.html';
 method _apiCall($act is ro,
-		 %args is ro) {
+                %args is ro) {
     # query cloudflare
     Readonly my $res => $self->_ua->post($CF_URL, {
-	%args,
-	# global args
-	# override user specified
-	tkn   => $self->_key,
-	email => $self->_user,
-	a     => $act
-					 });
+        %args,
+        # global args
+        # override user specified
+        tkn   => $self->_key,
+        email => $self->_user,
+        a     => $act
+                                         });
     throw CloudFlare::Client::Exception::Connection(
-	status  => $res->status_line,
-	message => 'HTTPS request failed'
-	) unless $res->is_success;
-    Readonly my $info => 
-	JSON::Any->jsonToObj($res->decoded_content);
+        status  => $res->status_line,
+        message => 'HTTPS request failed'
+        ) unless $res->is_success;
+    Readonly my $info =>
+        JSON::Any->jsonToObj($res->decoded_content);
     throw CloudFlare::Client::Exception::Upstream(
-	errorCode => $info->{err_code},
-	message   => $info->{msg}
-	) unless $info->{result} eq 'success';
+        errorCode => $info->{err_code},
+        message   => $info->{msg}
+        ) unless $info->{result} eq 'success';
 
     $info->{response}
 }
 
 # Methods
 method stats($zone  is ro,
-	     $itrvl is ro) {
+             $itrvl is ro) {
     $self->_apiCall('stats',
-		     z        => $zone,
-		     interval => $itrvl);
+                    z        => $zone,
+                    interval => $itrvl);
 }
 
 method zoneLoadMulti {
@@ -84,73 +86,73 @@ method zoneLoadMulti {
 
 method recLoadAll($zone is ro) {
     $self->_apiCall('rec_load_all',
-		    z => $zone);
+                    z => $zone);
 }
 
 method zoneCheck(@zones is ro) {
     $self->_apiCall('zone_check',
-		    zones => join ',', @zones);
+                    zones => join ',', @zones);
 }
 
 method zoneIps($zone is ro, %args is ro) {
     $self->_apiCall('zone_ips',
-		    %args,
-		    # Override user specified
-		    z     => $zone);
+                    %args,
+                    # Override user specified
+                    z     => $zone);
 }
 
 method ipLkup($ip is ro) {
     $self->_apiCall('ip_lkup',
-		    ip => $ip);
+                    ip => $ip);
 }
 
 method zoneSettings($zone is ro) {
     $self->_apiCall('zone_settings',
-		    z => $zone);
+                    z => $zone);
 }
 
 method secLvl($zone is ro, $secLvl is ro) {
     $self->_apiCall('sec_lvl',
-		    z => $zone,
-		    v => $secLvl);
+                    z => $zone,
+                    v => $secLvl);
 }
 
 method cacheLvl($zone is ro, $cchLvl is ro) {
     $self->_apiCall('cache_lvl',
-		    z => $zone,
-		    v => $cchLvl);
+                    z => $zone,
+                    v => $cchLvl);
 }
 
 method devMode($zone is ro, $val is ro) {
     $self->_apiCall('devmode',
-		    z => $zone,
-		    v => $val);
+                    z => $zone,
+                    v => $val);
 }
 
 method fpurgeTs($zone is ro, $val is ro) {
     $self->_apiCall('fpurge_ts',
-		    z => $zone,
-		    v => $val);
+                    z => $zone,
+                    v => $val);
 }
 
 method zoneFilePurge($zone is ro, $url is ro) {
     $self->_apiCall('zone_file_purge',
-		    z   => $zone,
-		    url => $url)
+                    z   => $zone,
+                    url => $url)
 }
 
 method zoneGrab($zId is ro) {
     $self->_apiCall('zone_grab',
-		    zid => $zId)
+                    zid => $zId)
 }
 
 method _wlBanNul($act is ro, $ip is ro) {
     $self->_apiCall($act,
-		    key => $ip);
+                    key => $ip);
 }
 
 method wl($ip is ro) {
-    $self->_wlBanNul('wl', $ip);		 
+    $self->_wlBanNul('wl', $ip);
 }
 
 method ban($ip is ro) {
@@ -163,66 +165,66 @@ method nul($ip is ro) {
 
 method ipv46($zone is ro, $val is ro) {
     $self->_apiCall('ipv46',
-		    z => $zone,
-		    v => $val)
+                    z => $zone,
+                    v => $val)
 }
 
 method async($zone is ro, $val is ro) {
     $self->_apiCall('async',
-		    z => $zone,
-		    v => $val)
+                    z => $zone,
+                    v => $val)
 }
 
 method minify($zone is ro, $val is ro) {
     $self->_apiCall('async',
-		    z => $zone,
-		    v => $val);
+                    z => $zone,
+                    v => $val);
 }
 
 method mirage2($zone is ro, $val is ro) {
     $self->_apiCall('mirage2',
-		    z => $zone,
-		    v => $val)
+                    z => $zone,
+                    v => $val)
 }
 
 method recNew($zone  is ro,
-	      $type  is ro,
-	      $name  is ro,
-	      $cntnt is ro,
-	      $ttl   is ro,
-	      %args  is ro) {
+              $type  is ro,
+              $name  is ro,
+              $cntnt is ro,
+              $ttl   is ro,
+              %args  is ro) {
     $self->_apiCall('rec_new',
-		    %args,
-		    # Override user specified
-		    z       => $zone,
-		    type    => $type,
-		    name    => $name,
-		    content => $cntnt,
-		    ttl     => $ttl);
+                    %args,
+                    # Override user specified
+                    z       => $zone,
+                    type    => $type,
+                    name    => $name,
+                    content => $cntnt,
+                    ttl     => $ttl);
 }
 
 method recEdit($zone  is ro,
-	       $type  is ro,
-	       $id    is ro,
-	       $name  is ro,
-	       $cntnt is ro,
-	       $ttl   is ro,
-	       %args  is ro) {
+               $type  is ro,
+               $id    is ro,
+               $name  is ro,
+               $cntnt is ro,
+               $ttl   is ro,
+               %args  is ro) {
     $self->_apiCall('rec_edit',
-		    %args,
-		    # override user specified
-		    z => $zone,
-		    type => $type,
-		    id => $id,
-		    name => $name,
-		    content => $cntnt,
-		    ttl     => $ttl)
+                    %args,
+                    # override user specified
+                    z => $zone,
+                    type => $type,
+                    id => $id,
+                    name => $name,
+                    content => $cntnt,
+                    ttl     => $ttl)
 }
 
 method recDelete($zone is ro, $id is ro) {
     $self->_apiCall('rec_delete',
-		    z  => $zone,
-		    id => $id);
+                    z  => $zone,
+                    id => $id);
 }
 
 __PACKAGE__->meta->make_immutable;
@@ -230,13 +232,17 @@ __PACKAGE__->meta->make_immutable;
 
 __END__
 
+=pod
+
+=encoding UTF-8
+
 =head1 NAME
 
-CloudFlare::Client - Interface to Cloudflare client API
+CloudFlare::Client - Object Orientated Interface to Cloudflare client API
 
 =head1 VERSION
 
-Version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 
@@ -250,12 +256,28 @@ Provides an object orientated interface to the CloudFlare client API
     $api->stats;
     ...
 
-=head1 METHODS
-
 Please see the documentation at
 L<https://www.cloudflare.com/docs/client-api.html> for information the
 CloudFlare client API and its arguments. Optional arguments are passed
 in as a hash with keys as given in the docs
+
+=head1 ATTRIBUTES
+
+=head2 _user
+
+CF user name (email) used to access the API. Set using the
+user argument to the constructor. Readonly.
+
+=head2 _key
+
+CF API key, set using the apikey argument to the constructor.
+Readonly
+
+=head2 _ua
+
+UserAgent object used to make API calls, set internally. Readonly
+
+=head1 METHODS
 
 =head2 new
 
@@ -359,24 +381,6 @@ Construct a new CloudFlare::Client API object
 
     $api->recDelete($zone, $recordId)
 
-=head1 PRIVATE ATTRIBUTES
-
-=head2 _user
-
-CF user name (email) used to access the API. Set using the
-user argument to the constructor. Readonly.
-
-=head2 _key
-
-CF API key, set using the apikey argument to the constructor.
-Readonly
-
-=head2 _ua
-
-UserAgent object used to make API calls, set internally. Readonly
-
-=head1 PRIVATE METHODS
-
 =head2 _apiCall
 
 Makes a call through to the CF API, via HTTPS POST
@@ -393,9 +397,7 @@ L<CloudFlare::Client::Exception::Upstream>
 Used to aggregrate a number of CF calls with a single signature into
 one function
 
-=head1 AUTHOR
-
-Peter Roberts, C<< <me+dev at peter-r.co.uk> >>
+=for test_synopsis my ($CF_USER, $CF_KEY);
 
 =head1 BUGS
 
@@ -415,23 +417,33 @@ You can also look for information at:
 
 =over 4
 
-=item * DDFlare
+=item *
 
-L<https://bitbucket.org/pwr22/ddflare>  
+DDFlare
 
-=item * RT: CPAN's request tracker (report bugs here)
+L<https://bitbucket.org/pwr22/ddflare>
+
+=item *
+
+RT: CPAN's request tracker (report bugs here)
 
 L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=CloudFlare-Client>
 
-=item * AnnoCPAN: Annotated CPAN documentation
+=item *
+
+AnnoCPAN: Annotated CPAN documentation
 
 L<http://annocpan.org/dist/CloudFlare-Client>
 
-=item * CPAN Ratings
+=item *
+
+CPAN Ratings
 
 L<http://cpanratings.perl.org/d/CloudFlare-Client>
 
-=item * Search CPAN
+=item *
+
+Search CPAN
 
 L<http://search.cpan.org/dist/CloudFlare-Client/>
 
@@ -441,32 +453,16 @@ L<http://search.cpan.org/dist/CloudFlare-Client/>
 
 Thanks to CloudFlare providing an awesome free service with an API.
 
-=head1 LICENSE AND COPYRIGHT
+=head1 AUTHOR
 
-Copyright 2014 Peter Roberts.
+Peter Roberts <me+dev@peter-r.co.uk>
 
-This program is distributed under the MIT (X11) License:
-L<http://www.opensource.org/licenses/mit-license.php>
+=head1 COPYRIGHT AND LICENSE
 
-Permission is hereby granted, free of charge, to any person
-obtaining a copy of this software and associated documentation
-files (the "Software"), to deal in the Software without
-restriction, including without limitation the rights to use,
-copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the
-Software is furnished to do so, subject to the following
-conditions:
+This software is Copyright (c) 2014 by Peter Roberts.
 
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
+This is free software, licensed under:
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.
+  The MIT (X11) License
 
 =cut

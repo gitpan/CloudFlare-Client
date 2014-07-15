@@ -1,6 +1,7 @@
 package CloudFlare::Client::Exception::Upstream;
+# ABSTRACT: Upstream CloudFlare API Exception
 
-use Modern::Perl '2014';
+use Modern::Perl '2012';
 use autodie ':all';
 
 use Readonly;
@@ -9,7 +10,7 @@ use Moose;
 use MooseX::StrictConstructor;
 use CloudFlare::Client::Types ':all';
 
-Readonly our $VERSION => 0.01;
+our $VERSION = '0.02'; # VERSION
 
 extends 'Throwable::Error';
 
@@ -23,13 +24,17 @@ __PACKAGE__->meta->make_immutable;
 
 __END__
 
+=pod
+
+=encoding UTF-8
+
 =head1 NAME
 
 CloudFlare::Client::Exception::Upstream - Upstream CloudFlare API Exception
 
 =head1 VERSION
 
-Version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 
@@ -70,9 +75,9 @@ On the class, throw a new exception
         errorCode => 'E_MAXAPI'
     );
     ...
-    
+
 On an instance, throw that exception
-  
+
     $e->throw;
 
 =head2 new
@@ -87,10 +92,6 @@ Construct a new exception
 =head1 INHERITED ATTRIBUTES AND METHODS
 
 See L<Throwable::Error>
-
-=head1 AUTHOR
-
-Peter Roberts, C<< <me+dev at peter-r.co.uk> >>
 
 =head1 BUGS
 
@@ -110,58 +111,48 @@ You can also look for information at:
 
 =over 4
 
-=item * DDFlare
+=item *
+
+DDFlare
 
 L<https://bitbucket.org/pwr22/ddflare>
 
-=item * CloudFlare Client API
+=item *
 
-L<https://www.cloudflare.com/docs/client-api.html>
-
-=item * RT: CPAN's request tracker (report bugs here)
+RT: CPAN's request tracker (report bugs here)
 
 L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=CloudFlare-Client>
 
-=item * AnnoCPAN: Annotated CPAN documentation
+=item *
+
+AnnoCPAN: Annotated CPAN documentation
 
 L<http://annocpan.org/dist/CloudFlare-Client>
 
-=item * CPAN Ratings
+=item *
+
+CPAN Ratings
 
 L<http://cpanratings.perl.org/d/CloudFlare-Client>
 
-=item * Search CPAN
+=item *
+
+Search CPAN
 
 L<http://search.cpan.org/dist/CloudFlare-Client/>
 
 =back
 
-=head1 LICENSE AND COPYRIGHT
+=head1 AUTHOR
 
-Copyright 2014 Peter Roberts.
+Peter Roberts <me+dev@peter-r.co.uk>
 
-This program is distributed under the MIT (X11) License:
-L<http://www.opensource.org/licenses/mit-license.php>
+=head1 COPYRIGHT AND LICENSE
 
-Permission is hereby granted, free of charge, to any person
-obtaining a copy of this software and associated documentation
-files (the "Software"), to deal in the Software without
-restriction, including without limitation the rights to use,
-copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the
-Software is furnished to do so, subject to the following
-conditions:
+This software is Copyright (c) 2014 by Peter Roberts.
 
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
+This is free software, licensed under:
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
-HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
-OTHER DEALINGS IN THE SOFTWARE.
+  The MIT (X11) License
 
 =cut
