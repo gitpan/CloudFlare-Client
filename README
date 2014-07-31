@@ -1,9 +1,9 @@
 
 
 This archive contains the distribution CloudFlare-Client,
-version 0.02:
+version 0.03:
 
-  Object Orientated Interface to Cloudflare client API
+  Object Orientated Interface to CloudFlare client API
 
 This software is Copyright (c) 2014 by Peter Roberts.
 

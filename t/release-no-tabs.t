@@ -20,9 +20,14 @@ my @files = (
     'lib/CloudFlare/Client/Exception/Upstream.pm',
     'lib/CloudFlare/Client/Types.pm',
     't/00-compile.t',
-    't/Exception-Connection.t',
-    't/Exception-Upstream.t',
-    't/Types.t',
+    't/01-Exception-Connection.t',
+    't/01-Exception-Upstream.t',
+    't/01-Types.t',
+    't/01-failure-connecting.t',
+    't/01-failure-upstream.t',
+    't/01-main.t',
+    't/01-success.t',
+    't/01-upstream-existence.t',
     't/author-critic.t',
     't/author-test-eol.t',
     't/release-cpan-changes.t',
@@ -39,8 +44,7 @@ my @files = (
     't/release-portability.t',
     't/release-synopsis.t',
     't/release-test-version.t',
-    't/release-unused-vars.t',
-    't/usage.t'
+    't/release-unused-vars.t'
 );
 
 notabs_ok($_) foreach @files;

@@ -10,14 +10,13 @@ use Moose;
 use MooseX::StrictConstructor;
 use MooseX::Types::Moose qw( Str );
 
-our $VERSION = '0.02'; # VERSION
+our $VERSION = '0.03'; # VERSION
 
 extends 'Throwable::Error';
 
 has status => (
     is       => 'ro',
-    isa      => Str
-    );
+    isa      => Str);
 
 __PACKAGE__->meta->make_immutable;
 1; # End of CloudFlare::Client::Exception::Connection
@@ -34,7 +33,7 @@ CloudFlare::Client::Exception::Connection - CloudFlare API Connection Exception
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 
@@ -42,14 +41,14 @@ Exception class for failures in the CloudFlare API connection
 
     use CloudFlare::Client::Exception::Connection;
 
-    throw CloudFlare::Client::Exception::Upstream(
+    CloudFlare::Client::Exception::Connection::->throw(
         message   => 'HTTPS connection failure',
-        status => '404'
+        status    => '404'
     );
 
-    my $e = new CloudFlare::Client::Exception::Connection(
+    my $e = CloudFlare::Client::Exception::Connection::->new(
         message   => 'HTTPS connection failure',
-        status => '404'
+        status    => '404'
     );
     $e->throw;
 
@@ -69,9 +68,9 @@ The status code for the connection failure
 
 On the class, throw a new exception
 
-    throw CloudFlare::Client::Exception::Connection(
+    CloudFlare::Client::Exception::Connection::->throw(
         message   => 'HTTPS connection failure',
-        status => '404'
+        status    => '404'
     );
     ...
 
@@ -83,12 +82,12 @@ On an instance, throw that exception
 
 Construct a new exception
 
-    my $e = new CloudFlare::Client::Exception::Connection(
+    my $e = CloudFlare::Client::Exception::Connection::->throw(
         message   => 'HTTPS connection failure',
         errorcode => '404'
     );
 
-=head1 INHERITED ATTRIBUTES AND METHODS
+=head1 INHERITANCE
 
 See L<Throwable::Error>
 

@@ -10,14 +10,13 @@ use Moose;
 use MooseX::StrictConstructor;
 use CloudFlare::Client::Types ':all';
 
-our $VERSION = '0.02'; # VERSION
+our $VERSION = '0.03'; # VERSION
 
 extends 'Throwable::Error';
 
 has errorCode => (
     is       => 'ro',
-    isa      => ErrorCode
-    );
+    isa      => ErrorCode);
 
 __PACKAGE__->meta->make_immutable;
 1; # End of CloudFlare::Client::Exception::Upstream
@@ -34,7 +33,7 @@ CloudFlare::Client::Exception::Upstream - Upstream CloudFlare API Exception
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 
@@ -42,12 +41,12 @@ Exception class that propagates errors from the CloudFlare API
 
     use CloudFlare::Client::Exception::Upstream;
 
-    throw CloudFlare::Client::Exception::Upstream(
+    CloudFlare::Client::Exception::Upstream::->throw(
         message   => 'Bad things occured',
         errorCode => 'E_MAXAPI'
     );
 
-    my $e = new CloudFlare::Client::Exception::Upstream(
+    my $e = CloudFlare::Client::Exception::Upstream::->new(
         message   => 'Bad things happened',
         errorcode => 'E_MAXAPI'
     );
@@ -70,7 +69,7 @@ E_UNAUTH, E_INVLDINPUT or E_MAXAPI.
 
 On the class, throw a new exception
 
-    throw CloudFlare::Client::Exception::Upstream(
+    CloudFlare::Client::Exception::Upstream::->throw(
         message   => 'Bad things occured',
         errorCode => 'E_MAXAPI'
     );
@@ -84,12 +83,12 @@ On an instance, throw that exception
 
 Construct a new exception
 
-    my $e = new CloudFlare::Client::Exception::Upstream(
+    my $e = CloudFlare::Client::Exception::Upstream::->new(
         message   => 'Bad things happened',
         errorcode => 'E_MAXAPI'
     );
 
-=head1 INHERITED ATTRIBUTES AND METHODS
+=head1 INHERITANCE
 
 See L<Throwable::Error>
 

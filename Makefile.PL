@@ -3,14 +3,14 @@
 use strict;
 use warnings;
 
-use 5.016;
+use 5.014;
 
 use ExtUtils::MakeMaker 6.30;
 
 
 
 my %WriteMakefileArgs = (
-  "ABSTRACT" => "Object Orientated Interface to Cloudflare client API",
+  "ABSTRACT" => "Object Orientated Interface to CloudFlare client API",
   "AUTHOR" => "Peter Roberts <me+dev\@peter-r.co.uk>",
   "CONFIGURE_REQUIRES" => {},
   "DISTNAME" => "CloudFlare-Client",
@@ -18,27 +18,30 @@ my %WriteMakefileArgs = (
   "LICENSE" => "mit",
   "NAME" => "CloudFlare::Client",
   "PREREQ_PM" => {
-    "Carp" => "1.24",
-    "JSON::Any" => "1.30",
-    "LWP::UserAgent" => "6.04",
-    "Method::Signatures" => 20111125,
+    "Carp" => "1.26",
+    "JSON::Any" => "1.26",
+    "LWP::UserAgent" => "6.00",
+    "Method::Signatures" => 20110923,
     "Modern::Perl" => "1.20120105",
-    "Moose" => "2.0402",
-    "MooseX::StrictConstructor" => "0.17",
-    "MooseX::Types" => "0.32",
+    "Moose" => "1.22",
+    "MooseX::StrictConstructor" => "0.13",
+    "MooseX::Types" => "0.26",
     "Readonly" => "1.04",
     "Throwable::Error" => "0.200003",
     "autodie" => "2.11",
-    "namespace::autoclean" => "0.14"
+    "namespace::autoclean" => "0.12"
   },
   "TEST_REQUIRES" => {
     "File::Spec" => "3.40",
-    "Test::Moose" => "2.0402",
-    "Test::More" => "0.99",
+    "HTTP::Response" => "6.00",
+    "LWP::Simple" => "6.00",
+    "Test::Exception" => "0.32",
+    "Test::LWP::UserAgent" => "0.002",
+    "Test::Moose" => "1.22",
     "Test::TypeTiny" => "0.001",
-    "Try::Tiny" => "0.12"
+    "Try::Tiny" => "0.11"
   },
-  "VERSION" => "0.02",
+  "VERSION" => "0.03",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -46,23 +49,26 @@ my %WriteMakefileArgs = (
 
 
 my %FallbackPrereqs = (
-  "Carp" => "1.24",
+  "Carp" => "1.26",
   "File::Spec" => "3.40",
-  "JSON::Any" => "1.30",
-  "LWP::UserAgent" => "6.04",
-  "Method::Signatures" => 20111125,
+  "HTTP::Response" => "6.00",
+  "JSON::Any" => "1.26",
+  "LWP::Simple" => "6.00",
+  "LWP::UserAgent" => "6.00",
+  "Method::Signatures" => 20110923,
   "Modern::Perl" => "1.20120105",
-  "Moose" => "2.0402",
-  "MooseX::StrictConstructor" => "0.17",
-  "MooseX::Types" => "0.32",
+  "Moose" => "1.22",
+  "MooseX::StrictConstructor" => "0.13",
+  "MooseX::Types" => "0.26",
   "Readonly" => "1.04",
-  "Test::Moose" => "2.0402",
-  "Test::More" => "0.99",
+  "Test::Exception" => "0.32",
+  "Test::LWP::UserAgent" => "0.002",
+  "Test::Moose" => "1.22",
   "Test::TypeTiny" => "0.001",
   "Throwable::Error" => "0.200003",
-  "Try::Tiny" => "0.12",
+  "Try::Tiny" => "0.11",
   "autodie" => "2.11",
-  "namespace::autoclean" => "0.14"
+  "namespace::autoclean" => "0.12"
 );
 
 

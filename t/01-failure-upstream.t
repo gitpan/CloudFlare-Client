@@ -1,71 +1,52 @@
 #!perl -T
-use Modern::Perl '2014';
 
+# This file aims to test the failure of all API calls with an upstream error
+package CloudFlare::Client::Test;
+
+use Modern::Perl '2012';
+use autodie ':all';
+
+use Moose;
+use namespace::autoclean;
 use Readonly;
 use Try::Tiny;
+
 use Test::More;
-use Test::Moose;
+use Test::Exception;
+use Test::LWP::UserAgent;
+use HTTP::Response;
+use JSON::Any;
 
-use CloudFlare::Client;
+plan tests => 33;
 
-plan tests => 43;
+extends 'CloudFlare::Client';
 
-# Tests for moose
-Readonly my $CLASS => 'CloudFlare::Client';
-meta_ok($CLASS);
-for my $attr (qw/ _user _key _ua/) {
-    has_attribute_ok($CLASS, $attr);
-}
+# Build a simple error response
+# Error code
+Readonly my $ERR_CODE   => 'E_UNAUTH';
+# Full response content
+Readonly my $CNT        => { result    => 'error',
+                             err_code  => $ERR_CODE,
+                             msg       => 'something'};
+# Reponse from server
+Readonly my $RSP  => HTTP::Response::->new(200);
+$RSP->content(JSON::Any::->objToJson($CNT));
 
-# Construction
-# Valid arguments
-Readonly my $USER => 'blah';
-Readonly my $KEY  => 'blah';
-try {
-    new_ok($CLASS, [
-               user    => $USER,
-               apikey  => $KEY
-           ],
-           'construction with valid credentials');
-} finally {
-    Readonly my $e => shift;
-    is($e, undef, "construction with valid credentials no exception");
-};
+# Override the real user agent with a mocked one
+# It will always return the error response $RSP
+has '+_ua' => (
+    is      => 'rw',
+    default => sub {
+        Readonly my $ua => Test::LWP::UserAgent::->new;
+        $ua->map_response(qr{www.cloudflare.com/api_json.html}, $RSP);
+        $ua});
 
-# Check an exception is the expected class
-sub _checkEType {
-    Readonly my $e        => shift;
-    Readonly my $eClass   => shift;
-    Readonly my $tstName  => shift;
-    diag($e) unless isa_ok($e, $eClass, $tstName)
-}
-# Missing user
-Readonly my $MISS_ARG_E =>
-    'Moose::Exception::AttributeIsRequired';
-try { new $CLASS(apikey => $KEY) } finally {
-    _checkEType(shift, $MISS_ARG_E,
-           "construction with missing user attribute exception")};
-# Missing apikey
-try { new $CLASS(user => $USER) } finally {
-    _checkEType(shift, $MISS_ARG_E,
-           "construction with missing apikey attribute exception")};
-# Extra attr
-try { new $CLASS(user   => $USER,
-                 apikey => $KEY,
-                 extra  => 'arg') } finally {
-                     _checkEType(shift, 'Moose::Exception::Legacy',
-                                 "construction with extra attribute exception")};
-
-# More moose tests
-Readonly my $api => try { new $CLASS(
-                              user    => $USER,
-                              apikey  => $KEY)};
-meta_ok($api);
-
-# methods - check for failure upstream
-# stats
-Readonly my $UPSTRM_E =>
-    'CloudFlare::Client::Exception::Upstream';
+# Test upstream failures
+# Catch potential failure
+Readonly my $API => try {
+    CloudFlare::Client::Test::->new( user => 'user', apikey  => 'KEY')}
+    catch { diag $_ };
+# Valid values
 Readonly my $ZONE         => 'zone.co.uk';
 Readonly my $ITRVL        => 20;
 Readonly my $HOURS        => 48;
@@ -91,9 +72,7 @@ Readonly my $WGHT         => 10;
 Readonly my $PORT         => 8080;
 Readonly my $TRGT         => 'dunno';
 Readonly my $IP6          => '::1';
-
 Readonly my $REC_ID       => 1;
-
 # method => [[ args1 ], ...]
 Readonly my %tstSpec => (
     stats         => [[ $ZONE, $ITRVL ]],
@@ -134,9 +113,9 @@ Readonly my %tstSpec => (
                         port => $PORT,
                         target => $TRGT ],
                       [ $ZONE, 'LOC', $REC_NAME, $IP, $TTL ]],
-    recDelete     => [[ $ZONE, $REC_ID ]]
-);
+    recDelete     => [[ $ZONE, $REC_ID ]]);
 for my $method ( sort keys %tstSpec ) {
     for my $args (@{ $tstSpec{$method} }) {
-        try { $api->$method(@$args) } finally {
-            _checkEType(shift, $UPSTRM_E, $method)}}}
+        throws_ok { $API->$method(@$args) }
+                  'CloudFlare::Client::Exception::Upstream',
+                  "$method dies with an invalid response"}}

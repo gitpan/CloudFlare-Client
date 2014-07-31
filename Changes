@@ -1,5 +1,14 @@
 Revision history for CloudFlare-Client
 
+0.03      2014-07-31
+ - Add a test for upstream connetivity that won't break on CPAN testers
+ - Perl requirement dropped to 5.014
+ - Tidy code and make it more robust
+ - Extensive testing of the API using Test::LWP::UserAgent
+ - Require at least one zone as an argument to zoneCheck
+ - Use Test::Exception rather than own stuff
+ - Get rid of upstream testing, they fail at CPAN Testers
+
 0.02      2014-07-16
  - Fix issues that prevent CPAN indexing
  - Package with Dist::Zilla

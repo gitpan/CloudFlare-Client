@@ -9,7 +9,7 @@ use MooseX::Types -declare => [ qw( CFCode ErrorCode ) ];
 use MooseX::Types::Moose qw( Undef );
 use Readonly;
 
-our $VERSION = '0.02'; # VERSION
+our $VERSION = '0.03'; # VERSION
 
 enum CFCode, [ qw( E_UNAUTH E_INVLDINPUT E_MAXAPI ) ];
 union ErrorCode, [ Undef, CFCode ];
@@ -28,13 +28,13 @@ CloudFlare::Client::Types - Types for Cloudflare::Client
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 
 Provides types used in CloudFlare::Client
 
-    use CloudFlare::Client::Types qw( ErrorCode );
+    use CloudFlare::Client::Types 'ErrorCode';
 
 Peter Roberts, C<< <me+dev at peter-r.co.uk> >>
 
