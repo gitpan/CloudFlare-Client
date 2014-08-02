@@ -29,11 +29,13 @@
       "runtime" : {
          "requires" : {
             "Carp" : "1.26",
+            "IPC::System::Simple" : "1.22",
             "JSON::Any" : "1.26",
             "LWP::UserAgent" : "6.00",
             "Method::Signatures" : "20110923",
             "Modern::Perl" : "1.20120105",
             "Moose" : "1.22",
+            "MooseX::SemiAffordanceAccessor" : "0.09",
             "MooseX::StrictConstructor" : "0.13",
             "MooseX::Types" : "0.26",
             "Readonly" : "1.04",
@@ -57,13 +59,13 @@
          }
       }
    },
-   "release_status" : "stable",
+   "release_status" : "testing",
    "resources" : {
       "bugtracker" : {
          "mailto" : "bug-cloudflare-client at rt.cpan.org",
          "web" : "http://rt.cpan.org/Public/Dist/Display.html?Name=CloudFlare-Client"
       }
    },
-   "version" : "0.03"
+   "version" : "0.03_0"
 }
 

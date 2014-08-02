@@ -5,14 +5,14 @@ use Modern::Perl '2012';
 use autodie ':all';
 
 use namespace::autoclean;
-use MooseX::Types -declare => [ qw( CFCode ErrorCode ) ];
-use MooseX::Types::Moose qw( Undef );
+use MooseX::Types -declare => [ qw( CFCode ErrorCode)];
+use MooseX::Types::Moose qw( Maybe);
 use Readonly;
 
-our $VERSION = '0.03'; # VERSION
+our $VERSION = '0.03_0'; # VERSION
 
-enum CFCode, [ qw( E_UNAUTH E_INVLDINPUT E_MAXAPI ) ];
-union ErrorCode, [ Undef, CFCode ];
+enum CFCode, [ qw( E_UNAUTH E_INVLDINPUT E_MAXAPI)];
+subtype ErrorCode, as Maybe[CFCode];
 
 1; # End of CloudFlare::Client::Types
 
@@ -28,7 +28,7 @@ CloudFlare::Client::Types - Types for Cloudflare::Client
 
 =head1 VERSION
 
-version 0.03
+version 0.03_0
 
 =head1 SYNOPSIS
 

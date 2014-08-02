@@ -8,9 +8,10 @@ use Readonly;
 use namespace::autoclean;
 use Moose;
 use MooseX::StrictConstructor;
+use MooseX::SemiAffordanceAccessor;
 use CloudFlare::Client::Types ':all';
 
-our $VERSION = '0.03'; # VERSION
+our $VERSION = '0.03_0'; # VERSION
 
 extends 'Throwable::Error';
 
@@ -33,7 +34,7 @@ CloudFlare::Client::Exception::Upstream - Upstream CloudFlare API Exception
 
 =head1 VERSION
 
-version 0.03
+version 0.03_0
 
 =head1 SYNOPSIS
 

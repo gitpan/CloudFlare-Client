@@ -28,18 +28,32 @@ lives_and { meta_ok($CLASS->new( user => $USER, apikey => $KEY))}
 lives_and {
     new_ok($CLASS, [ user => $USER, apikey  => $KEY])}
     "construction with valid credentials works";
-
-# Missing user
-Readonly my $MISS_ARG_E => 'Moose::Exception::AttributeIsRequired';
-throws_ok { $CLASS->new(apikey => $KEY) } $MISS_ARG_E,
-    "construction with missing user attribute throws exception";
-# Missing apikey
-throws_ok { $CLASS->new(user => $USER) } $MISS_ARG_E,
-    "construction with missing apikey attribute throws exception";
-# Extra attr
-throws_ok { $CLASS->new(user => $USER, apikey => $KEY, extra => 'arg')}
-    'Moose::Exception::Legacy',
-    "construction with extra attribute throws exception";
+# Work around Moose versions
+if($Moose::VERSION >= 2.1101) {
+    # Missing user
+    Readonly my $MISS_ARG_E => 'Moose::Exception::AttributeIsRequired';
+    throws_ok { $CLASS->new(apikey => $KEY) } $MISS_ARG_E,
+        "construction with missing user attribute throws exception";
+    # Missing apikey
+    throws_ok { $CLASS->new(user => $USER) } $MISS_ARG_E,
+        "construction with missing apikey attribute throws exception";
+    # Extra attr
+    throws_ok { $CLASS->new(user => $USER, apikey => $KEY, extra => 'arg')}
+        'Moose::Exception::Legacy',
+        "construction with extra attribute throws exception"}
+# Old Mooses throw strings
+else { # Missing message attr
+       throws_ok { $CLASS->new(apikey => $KEY) }
+           qr/^Attribute (_user) is required/,
+           'Construction with missing user attr dies';
+       # Missing apikey attr
+       throws_ok { $CLASS->new(user => $USER) }
+           qr/^Attribute (_key) is required/,
+           'Construction with missing apikey attr dies';
+       # Extra attr
+       throws_ok { $CLASS->new(user => $USER, apikey => $KEY, extra => 'arg')}
+           qr/^Found unknown attribute(s)/,
+           'construction with extra attr throws exception'}
 
 # Catch potential failure
 Readonly my $API => try { $CLASS->new( user => $USER, apikey => $KEY)}

@@ -21,11 +21,13 @@ meta-spec:
 name: CloudFlare-Client
 requires:
   Carp: '1.26'
+  IPC::System::Simple: '1.22'
   JSON::Any: '1.26'
   LWP::UserAgent: '6.00'
   Method::Signatures: '20110923'
   Modern::Perl: '1.20120105'
   Moose: '1.22'
+  MooseX::SemiAffordanceAccessor: '0.09'
   MooseX::StrictConstructor: '0.13'
   MooseX::Types: '0.26'
   Readonly: '1.04'
@@ -35,4 +37,4 @@ requires:
   perl: '5.014'
 resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=CloudFlare-Client
-version: '0.03'
+version: 0.03_0

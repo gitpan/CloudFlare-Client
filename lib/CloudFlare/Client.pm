@@ -9,6 +9,7 @@ use namespace::autoclean;
 use Carp;
 use Moose;
 use MooseX::StrictConstructor;
+use MooseX::SemiAffordanceAccessor;
 use Method::Signatures;
 
 use CloudFlare::Client::Exception::Connection;
@@ -16,7 +17,7 @@ use CloudFlare::Client::Exception::Upstream;
 use LWP::UserAgent;
 use JSON::Any;
 
-our $VERSION = '0.03'; # VERSION
+our $VERSION = '0.03_0'; # VERSION
 
 # Read only attributes
 # Cloudflare credentials
@@ -166,7 +167,7 @@ CloudFlare::Client - Object Orientated Interface to CloudFlare client API
 
 =head1 VERSION
 
-version 0.03
+version 0.03_0
 
 =head1 SYNOPSIS
 

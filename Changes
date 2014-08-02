@@ -1,5 +1,9 @@
 Revision history for CloudFlare-Client
 
+0.03_0    2014-08-02
+ - Improve companatibility, in particular testing, for CPAN Testers
+ - Tidy code a bit
+
 0.03      2014-07-31
  - Add a test for upstream connetivity that won't break on CPAN testers
  - Perl requirement dropped to 5.014

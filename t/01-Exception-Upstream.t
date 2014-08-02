@@ -30,14 +30,27 @@ lives_and { new_ok($CLASS => [ message => $MSG, errorCode => 'E_MAXAPI'])}
 # No error code
 lives_and { new_ok($CLASS => [ message => $MSG])}
     "construction with no EC works";
-# Invalid error code
-throws_ok { $CLASS->new( message => $MSG, errorCode => 'E_NOTSPECD')}
-    'Moose::Exception::ValidationFailedForInlineTypeConstraint',
-    'construction with invalid EC fails';
-# Missing message
-throws_ok { $CLASS->new } 'Moose::Exception::AttributeIsRequired',
-    "construction with missing message attr fails";
-# Extra attr
-throws_ok { $CLASS->new(message => $MSG, extra => 'arg')}
-    'Moose::Exception::Legacy',
-    'construction with extra attr fails';
+# Work around Moose versions
+if($Moose::VERSION >= 2.1101) {
+    # Invalid error code
+    throws_ok { $CLASS->new( message => $MSG, errorCode => 'E_NOTSPECD')}
+        'Moose::Exception::ValidationFailedForInlineTypeConstraint',
+        'construction with invalid EC fails';
+    # Missing message attr
+    throws_ok { $CLASS->new } 'Moose::Exception::AttributeIsRequired',
+        "construction with missing message attr throws exception";
+    # Extra attr
+    throws_ok { $CLASS->new(message => $MSG, extra => 'arg')}
+        'Moose::Exception::Legacy',
+        'construction with extra attr throws exception'}
+else { # Invalid error code
+       throws_ok { $CLASS->new( message => $MSG, errorCode => 'E_NOTSPECD')}
+           qr/^Attribute (errorCode) does not pass the type constraint/,
+           'construction with invalid EC fails';
+       # Missing message attr
+       throws_ok { $CLASS->new } qr/^Attribute (message) is required/,
+           'Construction with missing message attr dies';
+       # Extra attr
+       throws_ok { $CLASS->new(message => $MSG, extra => 'arg')}
+           qr/^Found unknown attribute(s)/,
+           'construction with extra attr throws exception'}

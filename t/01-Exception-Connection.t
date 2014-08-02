@@ -1,6 +1,8 @@
 #!perl -T
 use Modern::Perl '2012';
 
+use Moose;
+
 use Test::More;
 use Test::Moose;
 use Test::Exception;
@@ -30,10 +32,20 @@ lives_and { new_ok($CLASS => [ message   => $MSG, status => 404])}
 # No status
 lives_and { new_ok($CLASS => [ message => $MSG])}
     "construction works without status attr";
-# Missing message
-throws_ok { $CLASS->new } 'Moose::Exception::AttributeIsRequired',
-    "construction with missing message attr throws exception";
-# Extra attr
-throws_ok { $CLASS->new(message => $MSG, extra => 'arg')}
-    'Moose::Exception::Legacy',
-    'construction with extra attr throws exception';
+# Work around Moose versions
+if($Moose::VERSION >= 2.1101) {
+    # Missing message attr
+    throws_ok { $CLASS->new } 'Moose::Exception::AttributeIsRequired',
+        "construction with missing message attr throws exception";
+    # Extra attr
+    throws_ok { $CLASS->new(message => $MSG, extra => 'arg')}
+        'Moose::Exception::Legacy',
+        'construction with extra attr throws exception'}
+else { # Missing message attr
+       throws_ok { $CLASS->new } qr/^Attribute (message) is required/,
+           'Construction with missing message attr dies';
+       # Extra attr
+       throws_ok { $CLASS->new(message => $MSG, extra => 'arg')}
+           qr/^Found unknown attribute(s)/,
+           'construction with extra attr throws exception'}
+
