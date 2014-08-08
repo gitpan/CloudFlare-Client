@@ -44,17 +44,19 @@ if($Moose::VERSION >= 2.1101) {
 # Old Mooses throw strings
 else { # Missing message attr
        throws_ok { $CLASS->new(apikey => $KEY) }
-           qr/^Attribute (_user) is required/,
+           qr/^Attribute \(_user\) is required/,
            'Construction with missing user attr dies';
        # Missing apikey attr
        throws_ok { $CLASS->new(user => $USER) }
-           qr/^Attribute (_key) is required/,
+           qr/^Attribute \(_key\) is required/,
            'Construction with missing apikey attr dies';
        # Extra attr
        throws_ok { $CLASS->new(user => $USER, apikey => $KEY, extra => 'arg')}
-           qr/^Found unknown attribute(s)/,
+           qr/^Found unknown attribute\(s\)/,
            'construction with extra attr throws exception'}
 
+# This matches exceptions from Kavorka
+Readonly my $ARGS_E => qr{^Expected (?:at least )?\d+ parameters?};
 # Catch potential failure
 Readonly my $API => try { $CLASS->new( user => $USER, apikey => $KEY)}
     catch { diag $_ };
@@ -113,7 +115,7 @@ Readonly my %tstTFSpec => (
 for my $method ( sort keys %tstTFSpec ) {
     for my $args (@{ $tstTFSpec{$method} }) {
         throws_ok { $API->$method(@$args) }
-            qr{missing required argument},
+            $ARGS_E,
             "too few args to $method throws exception"}}
 # Tests with too many args
 Readonly my %tstTMSpec => (
@@ -139,5 +141,5 @@ Readonly my %tstTMSpec => (
 for my $method ( sort keys %tstTMSpec ) {
     for my $args (@{ $tstTMSpec{$method} }) {
         throws_ok { $API->$method(@$args) }
-            qr{was given too many arguments},
+            $ARGS_E,
             "too many args to $method throws exception"}}

@@ -11,7 +11,7 @@ use MooseX::StrictConstructor;
 use MooseX::SemiAffordanceAccessor;
 use MooseX::Types::Moose qw( Str );
 
-our $VERSION = '0.03_0'; # VERSION
+our $VERSION = '0.03_1'; # VERSION
 
 extends 'Throwable::Error';
 
@@ -34,7 +34,7 @@ CloudFlare::Client::Exception::Connection - CloudFlare API Connection Exception
 
 =head1 VERSION
 
-version 0.03_0
+version 0.03_1
 
 =head1 SYNOPSIS
 

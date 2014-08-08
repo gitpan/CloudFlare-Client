@@ -42,10 +42,10 @@ if($Moose::VERSION >= 2.1101) {
         'Moose::Exception::Legacy',
         'construction with extra attr throws exception'}
 else { # Missing message attr
-       throws_ok { $CLASS->new } qr/^Attribute (message) is required/,
+       throws_ok { $CLASS->new } qr/^Attribute \(message\) is required/,
            'Construction with missing message attr dies';
        # Extra attr
        throws_ok { $CLASS->new(message => $MSG, extra => 'arg')}
-           qr/^Found unknown attribute(s)/,
+           qr/^Found unknown attribute\(s\)/,
            'construction with extra attr throws exception'}
 

@@ -1,11 +1,19 @@
 Revision history for CloudFlare-Client
 
+0.03_1    2014-08-08
+ - Fix some exception tests on older Mooses by actually escaping brackets in
+   regexes, should make Strawberry Perl happier
+ - Try harder to test for HTTPS connectivity when testing upstream existence
+   and make sure it is required for install
+ - Method::Signatures -> Kavorka
+ - Tidy distribution a bit
+
 0.03_0    2014-08-02
- - Improve companatibility, in particular testing, for CPAN Testers
+ - Improve compatibility, in particular testing, for CPAN Testers
  - Tidy code a bit
 
 0.03      2014-07-31
- - Add a test for upstream connetivity that won't break on CPAN testers
+ - Add a test for upstream connectivity that won't break on CPAN testers
  - Perl requirement dropped to 5.014
  - Tidy code and make it more robust
  - Extensive testing of the API using Test::LWP::UserAgent

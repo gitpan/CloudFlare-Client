@@ -10,14 +10,14 @@ use Carp;
 use Moose;
 use MooseX::StrictConstructor;
 use MooseX::SemiAffordanceAccessor;
-use Method::Signatures;
+use Kavorka;
 
 use CloudFlare::Client::Exception::Connection;
 use CloudFlare::Client::Exception::Upstream;
 use LWP::UserAgent;
 use JSON::Any;
 
-our $VERSION = '0.03_0'; # VERSION
+our $VERSION = '0.03_1'; # VERSION
 
 # Read only attributes
 # Cloudflare credentials
@@ -69,7 +69,7 @@ method _apiCall($act is ro, %args is ro) {
 method stats($zone  is ro, $itrvl is ro) {
     $self->_apiCall('stats', z => $zone, interval => $itrvl)}
 
-method zoneLoadMulti {
+method zoneLoadMulti () {
     $self->_apiCall('zone_load_multi')}
 
 method recLoadAll($zone is ro) {
@@ -167,7 +167,7 @@ CloudFlare::Client - Object Orientated Interface to CloudFlare client API
 
 =head1 VERSION
 
-version 0.03_0
+version 0.03_1
 
 =head1 SYNOPSIS
 

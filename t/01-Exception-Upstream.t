@@ -45,12 +45,12 @@ if($Moose::VERSION >= 2.1101) {
         'construction with extra attr throws exception'}
 else { # Invalid error code
        throws_ok { $CLASS->new( message => $MSG, errorCode => 'E_NOTSPECD')}
-           qr/^Attribute (errorCode) does not pass the type constraint/,
+           qr/^Attribute \(errorCode\) does not pass the type constraint/,
            'construction with invalid EC fails';
        # Missing message attr
-       throws_ok { $CLASS->new } qr/^Attribute (message) is required/,
+       throws_ok { $CLASS->new } qr/^Attribute \(message\) is required/,
            'Construction with missing message attr dies';
        # Extra attr
        throws_ok { $CLASS->new(message => $MSG, extra => 'arg')}
-           qr/^Found unknown attribute(s)/,
+           qr/^Found unknown attribute\(s\)/,
            'construction with extra attr throws exception'}
