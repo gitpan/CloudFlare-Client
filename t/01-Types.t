@@ -17,5 +17,6 @@ should_pass($_, CFCode, "$_ is a CFCode") foreach @CF_CODES;
 should_fail($INVLD_CODE, CFCode, 'E_NTSPCD is not a CFCode');
 
 # Test ErrorCode
-should_pass($_, ErrorCode, "$_ is a ErrorCode") foreach @ERR_CODES;
+{ no warnings 'uninitialized';
+  should_pass($_, ErrorCode, "$_ is a ErrorCode") foreach @ERR_CODES}
 should_fail($INVLD_CODE, ErrorCode, 'E_NTSPCD is not an ErrorCode');

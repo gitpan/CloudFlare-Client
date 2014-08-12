@@ -19,23 +19,36 @@ meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: '1.4'
 name: CloudFlare-Client
+provides:
+  CloudFlare::Client:
+    file: lib/CloudFlare/Client.pm
+    version: 0.03_2
+  CloudFlare::Client::Exception::Connection:
+    file: lib/CloudFlare/Client/Exception/Connection.pm
+    version: 0.03_2
+  CloudFlare::Client::Exception::Upstream:
+    file: lib/CloudFlare/Client/Exception/Upstream.pm
+    version: 0.03_2
+  CloudFlare::Client::Types:
+    file: lib/CloudFlare/Client/Types.pm
+    version: 0.03_2
 requires:
-  Carp: '1.26'
   IPC::System::Simple: '1.22'
   JSON::Any: '1.26'
   Kavorka: '0.001'
   LWP::Protocol::https: '6.02'
   LWP::UserAgent: '6.02'
   Modern::Perl: '1.20120105'
-  Moose: '1.22'
-  MooseX::SemiAffordanceAccessor: '0.09'
-  MooseX::StrictConstructor: '0.13'
-  MooseX::Types: '0.26'
+  Moo: '0.009005'
+  MooX::StrictConstructor: '0.001'
   Readonly: '1.04'
   Throwable::Error: '0.200003'
+  Type::Library: '0.008'
+  Type::Utils: '0.001'
+  Types::Standard: '0.001'
   autodie: '2.11'
   namespace::autoclean: '0.12'
   perl: '5.014'
 resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=CloudFlare-Client
-version: 0.03_1
+version: 0.03_2

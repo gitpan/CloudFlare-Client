@@ -3,23 +3,22 @@ package CloudFlare::Client::Exception::Connection;
 
 use Modern::Perl '2012';
 use autodie ':all';
+use namespace::autoclean;
 
 use Readonly;
-use namespace::autoclean;
-use Moose;
-use MooseX::StrictConstructor;
-use MooseX::SemiAffordanceAccessor;
-use MooseX::Types::Moose qw( Str );
+use Moo;
+use MooX::StrictConstructor;
+use Types::Standard 'Str';
 
-our $VERSION = '0.03_1'; # VERSION
+our $VERSION = '0.03_2'; # VERSION
 
 extends 'Throwable::Error';
 
 has status => (
     is       => 'ro',
-    isa      => Str);
+    isa      => Str,
+    required => 1);
 
-__PACKAGE__->meta->make_immutable;
 1; # End of CloudFlare::Client::Exception::Connection
 
 __END__
@@ -34,7 +33,7 @@ CloudFlare::Client::Exception::Connection - CloudFlare API Connection Exception
 
 =head1 VERSION
 
-version 0.03_1
+version 0.03_2
 
 =head1 SYNOPSIS
 

@@ -7,7 +7,8 @@ package CloudFlare::Client::Test;
 use Modern::Perl '2012';
 use autodie ':all';
 
-use Moose;
+use Moo;
+use MooX::StrictConstructor;
 use namespace::autoclean;
 use Readonly;
 use Try::Tiny;
@@ -22,7 +23,7 @@ extends 'CloudFlare::Client';
 
 # Override the real user agent with a mocked one
 # It will always fail to connect
-has '+_ua' => ( default => sub { Test::LWP::UserAgent::->new } );
+sub _buildUa { Test::LWP::UserAgent::->new }
 
 # Test upstream failures
 # Catch potential failure

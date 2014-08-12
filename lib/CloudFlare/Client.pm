@@ -3,42 +3,48 @@ package CloudFlare::Client;
 
 use Modern::Perl '2012';
 use autodie ':all';
+use namespace::autoclean;
 
 use Readonly;
-use namespace::autoclean;
-use Carp;
-use Moose;
-use MooseX::StrictConstructor;
-use MooseX::SemiAffordanceAccessor;
+use Moo;
+use MooX::StrictConstructor;
+use Types::Standard 'Str';
+use CloudFlare::Client::Types 'LWPUserAgent';
 use Kavorka;
 
 use CloudFlare::Client::Exception::Connection;
 use CloudFlare::Client::Exception::Upstream;
-use LWP::UserAgent;
+use LWP::UserAgent 6.02;
+# This isn't used directly but we want the dependency
+use LWP::Protocol::https 6.02;
 use JSON::Any;
 
-our $VERSION = '0.03_1'; # VERSION
+our $VERSION = '0.03_2'; # VERSION
 
 # Read only attributes
 # Cloudflare credentials
 has '_user' => (
     is       => 'ro',
-    isa      => 'Str',
+    isa      => Str,
     required => 1,
     init_arg => 'user');
 has '_key' => (
     is       => 'ro',
-    isa      => 'Str',
+    isa      => Str,
     required => 1,
     init_arg => 'apikey');
-Readonly my $UA_STRING =>
-    "CloudFlare::Client/$CloudFlare::Client::VERSION";
+
+Readonly my $UA_STRING => "CloudFlare::Client/$CloudFlare::Client::VERSION";
+sub _buildUa {
+    Readonly my $ua => LWP::UserAgent::->new;
+    $ua->agent($UA_STRING);
+    return $ua}
 has '_ua' => (
     is       => 'ro',
-    default  => sub { Readonly my $ua => LWP::UserAgent::->new;
-                      $ua->agent($UA_STRING);
-                      $ua},
-    init_arg => undef);
+    isa      => LWPUserAgent,
+    required => 1,
+    init_arg => undef,
+    builder  => '_buildUa');
 
 # private methods
 Readonly my $CF_URL =>
@@ -52,10 +58,12 @@ method _apiCall($act is ro, %args is ro) {
         tkn   => $self->_key,
         email => $self->_user,
         a     => $act});
+    # Handle connection errors
     CloudFlare::Client::Exception::Connection::->throw(
         status  => $res->status_line,
         message => 'HTTPS request failed')
         unless $res->is_success;
+    # Handle errors from CF
     Readonly my $info =>
         JSON::Any::->jsonToObj($res->decoded_content);
     CloudFlare::Client::Exception::Upstream::->throw(
@@ -63,96 +71,95 @@ method _apiCall($act is ro, %args is ro) {
         message   => $info->{msg})
         unless $info->{result} eq 'success';
 
-    $info->{response}}
+    return $info->{response}}
 
 # Methods
 method stats($zone  is ro, $itrvl is ro) {
-    $self->_apiCall('stats', z => $zone, interval => $itrvl)}
+    return $self->_apiCall('stats', z => $zone, interval => $itrvl)}
 
 method zoneLoadMulti () {
-    $self->_apiCall('zone_load_multi')}
+    return $self->_apiCall('zone_load_multi')}
 
 method recLoadAll($zone is ro) {
-    $self->_apiCall('rec_load_all', z => $zone)}
+    return $self->_apiCall('rec_load_all', z => $zone)}
 
 # Requires at least one zone, but can take any number
 method zoneCheck($fZone is ro, @rZones is ro) {
-    $self->_apiCall('zone_check', zones => join ',', $fZone, @rZones)}
+    return $self->_apiCall('zone_check', zones => join ',', $fZone, @rZones)}
 
 method zoneIps($zone is ro, %args is ro) {
-    $self->_apiCall('zone_ips', %args,
-                    # Override user specified
-                    z     => $zone)}
+    return $self->_apiCall('zone_ips', %args,
+                           # Override user specified
+                           z     => $zone)}
 
 method ipLkup($ip is ro) {
-    $self->_apiCall('ip_lkup', ip => $ip)}
+    return $self->_apiCall('ip_lkup', ip => $ip)}
 
 method zoneSettings($zone is ro) {
-    $self->_apiCall('zone_settings', z => $zone)}
+    return $self->_apiCall('zone_settings', z => $zone)}
 
 method secLvl($zone is ro, $secLvl is ro) {
-    $self->_apiCall('sec_lvl', z => $zone, v => $secLvl);
+    return $self->_apiCall('sec_lvl', z => $zone, v => $secLvl);
 }
 
 method cacheLvl($zone is ro, $cchLvl is ro) {
-    $self->_apiCall('cache_lvl', z => $zone, v => $cchLvl)}
+    return $self->_apiCall('cache_lvl', z => $zone, v => $cchLvl)}
 
 method devMode($zone is ro, $val is ro) {
-    $self->_apiCall('devmode', z => $zone, v => $val)}
+    return $self->_apiCall('devmode', z => $zone, v => $val)}
 
 method fpurgeTs($zone is ro, $val is ro) {
-    $self->_apiCall('fpurge_ts', z => $zone, v => $val)}
+    return $self->_apiCall('fpurge_ts', z => $zone, v => $val)}
 
 method zoneFilePurge($zone is ro, $url is ro) {
-    $self->_apiCall('zone_file_purge', z => $zone, url => $url)}
+    return $self->_apiCall('zone_file_purge', z => $zone, url => $url)}
 
 method zoneGrab($zId is ro) {
-    $self->_apiCall('zone_grab', zid => $zId)}
+    return $self->_apiCall('zone_grab', zid => $zId)}
 
 method _wlBanNul($act is ro, $ip is ro) {
-    $self->_apiCall($act, key => $ip)}
+    return $self->_apiCall($act, key => $ip)}
 
 method wl($ip is ro) {
-    $self->_wlBanNul('wl', $ip)}
+    return $self->_wlBanNul('wl', $ip)}
 
 method ban($ip is ro) {
-    $self->_wlBanNul('ban', $ip)}
+    return $self->_wlBanNul('ban', $ip)}
 
 method nul($ip is ro) {
-    $self->_wlBanNul('nul', $ip)}
+    return $self->_wlBanNul('nul', $ip)}
 
 method ipv46($zone is ro, $val is ro) {
-    $self->_apiCall('ipv46', z => $zone, v => $val)}
+    return $self->_apiCall('ipv46', z => $zone, v => $val)}
 
 method async($zone is ro, $val is ro) {
-    $self->_apiCall('async', z => $zone, v => $val)}
+    return $self->_apiCall('async', z => $zone, v => $val)}
 
 method minify($zone is ro, $val is ro) {
-    $self->_apiCall('async', z => $zone, v => $val)}
+    return $self->_apiCall('async', z => $zone, v => $val)}
 
 method mirage2($zone is ro, $val is ro) {
-    $self->_apiCall('mirage2', z => $zone, v => $val)}
+    return $self->_apiCall('mirage2', z => $zone, v => $val)}
 
 method recNew($zone is ro, $type is ro, $name is ro, $cntnt is ro,
               $ttl is ro, %args is ro) {
-    $self->_apiCall('rec_new',
-                    %args,
-                    # Override user specified
-                    z => $zone, type => $type, name => $name,
-                    content => $cntnt, ttl => $ttl)}
+    return $self->_apiCall('rec_new',
+                           %args,
+                           # Override user specified
+                           z => $zone, type => $type, name => $name,
+                           content => $cntnt, ttl => $ttl)}
 
 method recEdit($zone is ro, $type is ro, $id is ro, $name is ro, $cntnt is ro,
                $ttl is ro, %args  is ro) {
-    $self->_apiCall('rec_edit',
-                    %args,
-                    # override user specified
-                    z => $zone, type => $type, id => $id, name => $name,
-                    content => $cntnt, ttl => $ttl)}
+    return $self->_apiCall('rec_edit',
+                           %args,
+                           # override user specified
+                           z => $zone, type => $type, id => $id, name => $name,
+                           content => $cntnt, ttl => $ttl)}
 
 method recDelete($zone is ro, $id is ro) {
-    $self->_apiCall('rec_delete', z => $zone, id => $id)}
+    return $self->_apiCall('rec_delete', z => $zone, id => $id)}
 
-__PACKAGE__->meta->make_immutable;
 1; # End of CloudFlare::Client
 
 __END__
@@ -167,7 +174,7 @@ CloudFlare::Client - Object Orientated Interface to CloudFlare client API
 
 =head1 VERSION
 
-version 0.03_1
+version 0.03_2
 
 =head1 SYNOPSIS
 

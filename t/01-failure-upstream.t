@@ -6,7 +6,8 @@ package CloudFlare::Client::Test;
 use Modern::Perl '2012';
 use autodie ':all';
 
-use Moose;
+use Moo;
+use MooX::StrictConstructor;
 use namespace::autoclean;
 use Readonly;
 use Try::Tiny;
@@ -34,12 +35,10 @@ $RSP->content(JSON::Any::->objToJson($CNT));
 
 # Override the real user agent with a mocked one
 # It will always return the error response $RSP
-has '+_ua' => (
-    is      => 'rw',
-    default => sub {
-        Readonly my $ua => Test::LWP::UserAgent::->new;
-        $ua->map_response(qr{www.cloudflare.com/api_json.html}, $RSP);
-        $ua});
+sub _buildUa {
+    Readonly my $ua => Test::LWP::UserAgent::->new;
+    $ua->map_response(qr{www.cloudflare.com/api_json.html}, $RSP);
+    $ua}
 
 # Test upstream failures
 # Catch potential failure

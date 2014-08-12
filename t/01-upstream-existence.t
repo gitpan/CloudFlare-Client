@@ -10,7 +10,7 @@ use LWP::Simple;
 use CloudFlare::Client;
 
 # A HTTPS URL that is always alive
-Readonly my $REF_URL => 'https://www.google.co.uk';
+Readonly my $REF_URL => 'https://www.cloudflare.com';
 
 # CPAN tests cannot do this
 plan skip_all => 'No net connectivity detected' unless get($REF_URL);

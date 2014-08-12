@@ -18,19 +18,19 @@ my %WriteMakefileArgs = (
   "LICENSE" => "mit",
   "NAME" => "CloudFlare::Client",
   "PREREQ_PM" => {
-    "Carp" => "1.26",
     "IPC::System::Simple" => "1.22",
     "JSON::Any" => "1.26",
     "Kavorka" => "0.001",
     "LWP::Protocol::https" => "6.02",
     "LWP::UserAgent" => "6.02",
     "Modern::Perl" => "1.20120105",
-    "Moose" => "1.22",
-    "MooseX::SemiAffordanceAccessor" => "0.09",
-    "MooseX::StrictConstructor" => "0.13",
-    "MooseX::Types" => "0.26",
+    "Moo" => "0.009005",
+    "MooX::StrictConstructor" => "0.001",
     "Readonly" => "1.04",
     "Throwable::Error" => "0.200003",
+    "Type::Library" => "0.008",
+    "Type::Utils" => "0.001",
+    "Types::Standard" => "0.001",
     "autodie" => "2.11",
     "namespace::autoclean" => "0.12"
   },
@@ -44,7 +44,7 @@ my %WriteMakefileArgs = (
     "Test::TypeTiny" => "0.001",
     "Try::Tiny" => "0.11"
   },
-  "VERSION" => "0.03_1",
+  "VERSION" => "0.03_2",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -52,7 +52,6 @@ my %WriteMakefileArgs = (
 
 
 my %FallbackPrereqs = (
-  "Carp" => "1.26",
   "File::Spec" => "3.40",
   "HTTP::Response" => "6.00",
   "IPC::System::Simple" => "1.22",
@@ -62,10 +61,8 @@ my %FallbackPrereqs = (
   "LWP::Simple" => "6.00",
   "LWP::UserAgent" => "6.02",
   "Modern::Perl" => "1.20120105",
-  "Moose" => "1.22",
-  "MooseX::SemiAffordanceAccessor" => "0.09",
-  "MooseX::StrictConstructor" => "0.13",
-  "MooseX::Types" => "0.26",
+  "Moo" => "0.009005",
+  "MooX::StrictConstructor" => "0.001",
   "Readonly" => "1.04",
   "Test::Exception" => "0.32",
   "Test::LWP::UserAgent" => "0.002",
@@ -73,6 +70,9 @@ my %FallbackPrereqs = (
   "Test::TypeTiny" => "0.001",
   "Throwable::Error" => "0.200003",
   "Try::Tiny" => "0.11",
+  "Type::Library" => "0.008",
+  "Type::Utils" => "0.001",
+  "Types::Standard" => "0.001",
   "autodie" => "2.11",
   "namespace::autoclean" => "0.12"
 );

@@ -3,16 +3,18 @@ package CloudFlare::Client::Types;
 
 use Modern::Perl '2012';
 use autodie ':all';
-
 use namespace::autoclean;
-use MooseX::Types -declare => [ qw( CFCode ErrorCode)];
-use MooseX::Types::Moose qw( Maybe);
+
+use Type::Library -base, -declare => qw( CFCode ErrorCode);
+use Type::Utils -all;
+use Types::Standard qw( Enum Maybe);
 use Readonly;
 
-our $VERSION = '0.03_1'; # VERSION
+our $VERSION = '0.03_2'; # VERSION
 
-enum CFCode, [ qw( E_UNAUTH E_INVLDINPUT E_MAXAPI)];
-subtype ErrorCode, as Maybe[CFCode];
+class_type 'LWP::UserAgent';
+declare CFCode, as Enum[qw( E_UNAUTH E_INVLDINPUT E_MAXAPI)];
+declare ErrorCode, as Maybe[CFCode];
 
 1; # End of CloudFlare::Client::Types
 
@@ -28,7 +30,7 @@ CloudFlare::Client::Types - Types for Cloudflare::Client
 
 =head1 VERSION
 
-version 0.03_1
+version 0.03_2
 
 =head1 SYNOPSIS
 

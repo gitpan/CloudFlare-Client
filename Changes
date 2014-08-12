@@ -1,5 +1,11 @@
 Revision history for CloudFlare-Client
 
+0.03_2    2014-08-12
+ - Try to improve upstream test for CPAN testers
+ - Tidy code a bit
+ - Port to Moo
+ - Port to use Type::Tiny
+
 0.03_1    2014-08-08
  - Fix some exception tests on older Mooses by actually escaping brackets in
    regexes, should make Strawberry Perl happier
