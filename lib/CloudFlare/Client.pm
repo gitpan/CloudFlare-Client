@@ -6,7 +6,7 @@ use autodie ':all';
 use namespace::autoclean;
 
 use Readonly;
-use Moo;
+use Moo::Lax;
 use MooX::StrictConstructor;
 use Types::Standard 'Str';
 use CloudFlare::Client::Types 'LWPUserAgent';
@@ -19,7 +19,7 @@ use LWP::UserAgent 6.02;
 use LWP::Protocol::https 6.02;
 use JSON::Any;
 
-our $VERSION = '0.03_2'; # VERSION
+our $VERSION = '0.03_3'; # TRIAL VERSION
 
 # Read only attributes
 # Cloudflare credentials
@@ -42,7 +42,6 @@ sub _buildUa {
 has '_ua' => (
     is       => 'ro',
     isa      => LWPUserAgent,
-    required => 1,
     init_arg => undef,
     builder  => '_buildUa');
 
@@ -174,7 +173,7 @@ CloudFlare::Client - Object Orientated Interface to CloudFlare client API
 
 =head1 VERSION
 
-version 0.03_2
+version 0.03_3
 
 =head1 SYNOPSIS
 

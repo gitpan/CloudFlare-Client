@@ -1,5 +1,10 @@
 Revision history for CloudFlare-Client
 
+0.03_3    2014-08-13
+ - Loosen dependancy removal during builds to try and group more
+ - Require newer Type::Utils because of a bug
+ - Moo::Lax because we don't want fatal warnings
+
 0.03_2    2014-08-12
  - Try to improve upstream test for CPAN testers
  - Tidy code a bit
