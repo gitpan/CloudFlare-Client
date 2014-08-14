@@ -37,13 +37,12 @@ my %WriteMakefileArgs = (
     "HTTP::Message" => "6.00",
     "LWP::Simple" => "6.00",
     "Moo" => "0.009005",
-    "Moose" => "1.22",
     "Test::Exception" => "0.32",
     "Test::LWP::UserAgent" => "0.002",
     "Try::Tiny" => "0.11",
     "Type::Tiny" => "0.039_12"
   },
-  "VERSION" => "0.03_3",
+  "VERSION" => "0.03_4",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -63,7 +62,6 @@ my %FallbackPrereqs = (
   "Moo" => "0.009005",
   "Moo::Lax" => "0.10",
   "MooX::StrictConstructor" => "0.001",
-  "Moose" => "1.22",
   "Readonly" => "1.04",
   "Test::Exception" => "0.32",
   "Test::LWP::UserAgent" => "0.002",

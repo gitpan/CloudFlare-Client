@@ -6,11 +6,11 @@ package CloudFlare::Client::Test;
 use Modern::Perl '2012';
 use autodie ':all';
 
-use Moo;
-use MooX::StrictConstructor;
 use namespace::autoclean;
 use Readonly;
 use Try::Tiny;
+use Moo::Lax;
+use MooX::StrictConstructor;
 
 use Test::More;
 use Test::Exception;

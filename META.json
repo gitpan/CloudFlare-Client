@@ -51,7 +51,6 @@
             "HTTP::Message" : "6.00",
             "LWP::Simple" : "6.00",
             "Moo" : "0.009005",
-            "Moose" : "1.22",
             "Test::Exception" : "0.32",
             "Test::LWP::UserAgent" : "0.002",
             "Try::Tiny" : "0.11",
@@ -63,19 +62,19 @@
    "provides" : {
       "CloudFlare::Client" : {
          "file" : "lib/CloudFlare/Client.pm",
-         "version" : "0.03_3"
+         "version" : "0.03_4"
       },
       "CloudFlare::Client::Exception::Connection" : {
          "file" : "lib/CloudFlare/Client/Exception/Connection.pm",
-         "version" : "0.03_3"
+         "version" : "0.03_4"
       },
       "CloudFlare::Client::Exception::Upstream" : {
          "file" : "lib/CloudFlare/Client/Exception/Upstream.pm",
-         "version" : "0.03_3"
+         "version" : "0.03_4"
       },
       "CloudFlare::Client::Types" : {
          "file" : "lib/CloudFlare/Client/Types.pm",
-         "version" : "0.03_3"
+         "version" : "0.03_4"
       }
    },
    "release_status" : "testing",
@@ -85,6 +84,6 @@
          "web" : "http://rt.cpan.org/Public/Dist/Display.html?Name=CloudFlare-Client"
       }
    },
-   "version" : "0.03_3"
+   "version" : "0.03_4"
 }
 

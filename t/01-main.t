@@ -5,11 +5,10 @@ use Modern::Perl '2012';
 use autodie ':all';
 
 use Readonly;
-use Test::More;
-use Test::Moose;
-use Test::Exception;
 use Try::Tiny;
 
+use Test::More;
+use Test::Exception;
 use CloudFlare::Client;
 
 plan tests => 42;

@@ -6,11 +6,10 @@ use autodie ':all';
 use namespace::autoclean;
 
 use Readonly;
-use Moo::Lax;
-use MooX::StrictConstructor;
+use Moo::Lax; use MooX::StrictConstructor;
 use CloudFlare::Client::Types 'ErrorCode';
 
-our $VERSION = '0.03_3'; # TRIAL VERSION
+our $VERSION = '0.03_4'; # VERSION
 
 extends 'Throwable::Error';
 
@@ -32,7 +31,7 @@ CloudFlare::Client::Exception::Upstream - Upstream CloudFlare API Exception
 
 =head1 VERSION
 
-version 0.03_3
+version 0.03_4
 
 =head1 SYNOPSIS
 

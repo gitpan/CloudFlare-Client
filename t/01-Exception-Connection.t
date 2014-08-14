@@ -1,13 +1,12 @@
 #!perl -T
 use Modern::Perl '2012';
+use autodie ':all';
 
 use Moo;
 use MooX::StrictConstructor;
 
 use Test::More;
-use Test::Moose;
 use Test::Exception;
-use Try::Tiny;
 use Readonly;
 
 use CloudFlare::Client::Exception::Connection;

@@ -1,13 +1,12 @@
 #!perl -T
 use Modern::Perl '2012';
+use autodie ':all';
 
+use Readonly;
 use Test::More;
-use Test::Moose;
 use Test::Exception;
-use Try::Tiny;
 
 use CloudFlare::Client::Exception::Upstream;
-use Readonly;
 
 plan tests => 7;
 Readonly my $MSG => 'Doesn\'t Matter';
