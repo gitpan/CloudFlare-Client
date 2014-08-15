@@ -2,9 +2,6 @@
 use Modern::Perl '2012';
 use autodie ':all';
 
-use Moo;
-use MooX::StrictConstructor;
-
 use Test::More;
 use Test::Exception;
 use Readonly;

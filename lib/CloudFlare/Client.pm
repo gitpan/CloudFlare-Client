@@ -6,7 +6,7 @@ use autodie ':all';
 use namespace::autoclean;
 
 use Readonly;
-use Moo::Lax; use MooX::StrictConstructor;
+use Moo; use MooX::StrictConstructor;
 use Types::Standard 'Str';
 use CloudFlare::Client::Types 'LWPUserAgent';
 use Kavorka;
@@ -18,7 +18,7 @@ use LWP::UserAgent 6.02;
 use LWP::Protocol::https 6.02;
 use JSON::Any;
 
-our $VERSION = '0.03_5'; # TRIAL VERSION
+our $VERSION = '0.03_6'; # TRIAL VERSION
 
 # Read only attributes
 # Cloudflare credentials
@@ -172,7 +172,7 @@ CloudFlare::Client - Object Orientated Interface to CloudFlare client API
 
 =head1 VERSION
 
-version 0.03_5
+version 0.03_6
 
 =head1 SYNOPSIS
 

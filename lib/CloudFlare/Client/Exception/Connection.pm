@@ -6,10 +6,10 @@ use autodie ':all';
 use namespace::autoclean;
 
 use Readonly;
-use Moo::Lax; use MooX::StrictConstructor;
+use Moo; use MooX::StrictConstructor;
 use Types::Standard 'Str';
 
-our $VERSION = '0.03_5'; # TRIAL VERSION
+our $VERSION = '0.03_6'; # TRIAL VERSION
 
 extends 'Throwable::Error';
 
@@ -32,7 +32,7 @@ CloudFlare::Client::Exception::Connection - CloudFlare API Connection Exception
 
 =head1 VERSION
 
-version 0.03_5
+version 0.03_6
 
 =head1 SYNOPSIS
 

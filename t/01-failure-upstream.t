@@ -9,8 +9,7 @@ use autodie ':all';
 use namespace::autoclean;
 use Readonly;
 use Try::Tiny;
-use Moo::Lax;
-use MooX::StrictConstructor;
+use Moo; use MooX::StrictConstructor;
 
 use Test::More;
 use Test::Exception;

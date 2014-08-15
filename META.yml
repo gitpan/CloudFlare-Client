@@ -6,7 +6,6 @@ build_requires:
   File::Spec: '3.40'
   HTTP::Response: '6.00'
   LWP::Simple: '6.00'
-  Moo: '0.009005'
   Test::Exception: '0.32'
   Test::LWP::UserAgent: '0.002'
   Test::TypeTiny: '0.001'
@@ -22,16 +21,16 @@ name: CloudFlare-Client
 provides:
   CloudFlare::Client:
     file: lib/CloudFlare/Client.pm
-    version: 0.03_5
+    version: 0.03_6
   CloudFlare::Client::Exception::Connection:
     file: lib/CloudFlare/Client/Exception/Connection.pm
-    version: 0.03_5
+    version: 0.03_6
   CloudFlare::Client::Exception::Upstream:
     file: lib/CloudFlare/Client/Exception/Upstream.pm
-    version: 0.03_5
+    version: 0.03_6
   CloudFlare::Client::Types:
     file: lib/CloudFlare/Client/Types.pm
-    version: 0.03_5
+    version: 0.03_6
 requires:
   IPC::System::Simple: '1.22'
   JSON::Any: '1.26'
@@ -39,7 +38,7 @@ requires:
   LWP::Protocol::https: '6.02'
   LWP::UserAgent: '6.02'
   Modern::Perl: '1.20120105'
-  Moo::Lax: '0.10'
+  Moo: '0.009005'
   MooX::StrictConstructor: '0.001'
   Readonly: '1.04'
   Throwable::Error: '0.200003'
@@ -51,4 +50,4 @@ requires:
   perl: '5.014'
 resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=CloudFlare-Client
-version: 0.03_5
+version: 0.03_6
