@@ -18,7 +18,7 @@ use LWP::UserAgent 6.02;
 use LWP::Protocol::https 6.02;
 use JSON::Any;
 
-our $VERSION = '0.03_4'; # VERSION
+our $VERSION = '0.03_5'; # TRIAL VERSION
 
 # Read only attributes
 # Cloudflare credentials
@@ -172,7 +172,7 @@ CloudFlare::Client - Object Orientated Interface to CloudFlare client API
 
 =head1 VERSION
 
-version 0.03_4
+version 0.03_5
 
 =head1 SYNOPSIS
 

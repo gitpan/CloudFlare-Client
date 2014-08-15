@@ -9,7 +9,7 @@ use Readonly;
 use Moo::Lax; use MooX::StrictConstructor;
 use Types::Standard 'Str';
 
-our $VERSION = '0.03_4'; # VERSION
+our $VERSION = '0.03_5'; # TRIAL VERSION
 
 extends 'Throwable::Error';
 
@@ -32,7 +32,7 @@ CloudFlare::Client::Exception::Connection - CloudFlare API Connection Exception
 
 =head1 VERSION
 
-version 0.03_4
+version 0.03_5
 
 =head1 SYNOPSIS
 

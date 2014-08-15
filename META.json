@@ -38,8 +38,10 @@
             "Moo::Lax" : "0.10",
             "MooX::StrictConstructor" : "0.001",
             "Readonly" : "1.04",
-            "Throwable" : "0.200003",
-            "Type::Tiny" : "0.039_12",
+            "Throwable::Error" : "0.200003",
+            "Type::Library" : "0.008",
+            "Type::Utils" : "0.039_12",
+            "Types::Standard" : "0.001",
             "autodie" : "2.11",
             "namespace::autoclean" : "0.12",
             "perl" : "5.014"
@@ -48,13 +50,13 @@
       "test" : {
          "requires" : {
             "File::Spec" : "3.40",
-            "HTTP::Message" : "6.00",
+            "HTTP::Response" : "6.00",
             "LWP::Simple" : "6.00",
             "Moo" : "0.009005",
             "Test::Exception" : "0.32",
             "Test::LWP::UserAgent" : "0.002",
+            "Test::TypeTiny" : "0.001",
             "Try::Tiny" : "0.11",
-            "Type::Tiny" : "0.039_12",
             "perl" : "5.014"
          }
       }
@@ -62,19 +64,19 @@
    "provides" : {
       "CloudFlare::Client" : {
          "file" : "lib/CloudFlare/Client.pm",
-         "version" : "0.03_4"
+         "version" : "0.03_5"
       },
       "CloudFlare::Client::Exception::Connection" : {
          "file" : "lib/CloudFlare/Client/Exception/Connection.pm",
-         "version" : "0.03_4"
+         "version" : "0.03_5"
       },
       "CloudFlare::Client::Exception::Upstream" : {
          "file" : "lib/CloudFlare/Client/Exception/Upstream.pm",
-         "version" : "0.03_4"
+         "version" : "0.03_5"
       },
       "CloudFlare::Client::Types" : {
          "file" : "lib/CloudFlare/Client/Types.pm",
-         "version" : "0.03_4"
+         "version" : "0.03_5"
       }
    },
    "release_status" : "testing",
@@ -84,6 +86,6 @@
          "web" : "http://rt.cpan.org/Public/Dist/Display.html?Name=CloudFlare-Client"
       }
    },
-   "version" : "0.03_4"
+   "version" : "0.03_5"
 }
 

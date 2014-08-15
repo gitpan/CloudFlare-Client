@@ -9,7 +9,7 @@ use Readonly;
 use Moo::Lax; use MooX::StrictConstructor;
 use CloudFlare::Client::Types 'ErrorCode';
 
-our $VERSION = '0.03_4'; # VERSION
+our $VERSION = '0.03_5'; # TRIAL VERSION
 
 extends 'Throwable::Error';
 
@@ -31,7 +31,7 @@ CloudFlare::Client::Exception::Upstream - Upstream CloudFlare API Exception
 
 =head1 VERSION
 
-version 0.03_4
+version 0.03_5
 
 =head1 SYNOPSIS
 

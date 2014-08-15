@@ -1,5 +1,8 @@
 Revision history for CloudFlare-Client
 
+0.03_5    2014-08-15
+ - Unloosen dependency removal to see if it stops CPAN tests exploding
+
 0.03_4    2014-08-14
  - No longer depend on Test::Moose or Moose
  - Use Moo::Lax in tests
