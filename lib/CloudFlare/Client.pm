@@ -1,14 +1,14 @@
 package CloudFlare::Client;
 # ABSTRACT: Object Orientated Interface to CloudFlare client API
 
-use Modern::Perl '2012';
-use autodie ':all';
+use Modern::Perl qw( 2012);
+use autodie      qw( :all);
 use namespace::autoclean;
 
 use Readonly;
-use Moo; use MooX::StrictConstructor;
-use Types::Standard 'Str';
-use CloudFlare::Client::Types 'LWPUserAgent';
+use Moose; use MooseX::StrictConstructor;
+use Types::Standard           qw( Str);
+use CloudFlare::Client::Types qw( LWPUserAgent);
 use Kavorka;
 
 use CloudFlare::Client::Exception::Connection;
@@ -18,7 +18,7 @@ use LWP::UserAgent 6.02;
 use LWP::Protocol::https 6.02;
 use JSON::Any;
 
-our $VERSION = '0.03_6'; # TRIAL VERSION
+our $VERSION = '0.03_7'; # TRIAL VERSION
 
 # Read only attributes
 # Cloudflare credentials
@@ -172,7 +172,7 @@ CloudFlare::Client - Object Orientated Interface to CloudFlare client API
 
 =head1 VERSION
 
-version 0.03_6
+version 0.03_7
 
 =head1 SYNOPSIS
 

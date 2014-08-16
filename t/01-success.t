@@ -9,11 +9,9 @@ use autodie ':all';
 use namespace::autoclean;
 use Readonly;
 use Try::Tiny;
-use Moo; use MooX::StrictConstructor;
+use Moose; use MooseX::StrictConstructor;
 
-use Test::More;
-use Test::Exception;
-use Test::LWP::UserAgent;
+use Test::More; use Test::Exception; use Test::LWP::UserAgent;
 use HTTP::Response;
 use JSON::Any;
 

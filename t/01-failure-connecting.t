@@ -4,13 +4,13 @@
 # connection cannot be made
 package CloudFlare::Client::Test;
 
-use Modern::Perl '2012';
-use autodie ':all';
+use Modern::Perl qw( 2012);
+use autodie      qw( :all);
 
 use namespace::autoclean;
 use Readonly;
 use Try::Tiny;
-use Moo; use MooX::StrictConstructor;
+use Moose; use MooseX::StrictConstructor;
 
 use Test::More;
 use Test::Exception;

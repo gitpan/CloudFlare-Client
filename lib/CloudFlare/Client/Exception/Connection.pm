@@ -1,15 +1,15 @@
 package CloudFlare::Client::Exception::Connection;
 # ABSTRACT: CloudFlare API Connection Exception
 
-use Modern::Perl '2012';
-use autodie ':all';
+use Modern::Perl qw( 2012);
+use autodie      qw( :all);
 use namespace::autoclean;
 
 use Readonly;
-use Moo; use MooX::StrictConstructor;
-use Types::Standard 'Str';
+use Moose; use MooseX::StrictConstructor;
+use Types::Standard qw( Str);
 
-our $VERSION = '0.03_6'; # TRIAL VERSION
+our $VERSION = '0.03_7'; # TRIAL VERSION
 
 extends 'Throwable::Error';
 
@@ -32,7 +32,7 @@ CloudFlare::Client::Exception::Connection - CloudFlare API Connection Exception
 
 =head1 VERSION
 
-version 0.03_6
+version 0.03_7
 
 =head1 SYNOPSIS
 

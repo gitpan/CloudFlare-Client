@@ -11,7 +11,7 @@ use Type::Utils 0.039_12 -all;
 use Types::Standard qw( Enum Maybe);
 use Readonly;
 
-our $VERSION = '0.03_6'; # TRIAL VERSION
+our $VERSION = '0.03_7'; # TRIAL VERSION
 
 class_type 'LWP::UserAgent';
 declare CFCode, as Enum[qw( E_UNAUTH E_INVLDINPUT E_MAXAPI)];
@@ -31,7 +31,7 @@ CloudFlare::Client::Types - Types for Cloudflare::Client
 
 =head1 VERSION
 
-version 0.03_6
+version 0.03_7
 
 =head1 SYNOPSIS
 

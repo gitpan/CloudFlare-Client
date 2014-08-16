@@ -1,5 +1,8 @@
 Revision history for CloudFlare-Client
 
+0.03_7    2014-08-16
+ - Moo -> Moose because CPAN tests are still failing
+
 0.03_6    2014-08-15
  - Moo::Lax -> Moo because CPAN tests are still failing
 

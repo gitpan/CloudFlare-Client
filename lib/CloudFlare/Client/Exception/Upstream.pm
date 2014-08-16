@@ -1,15 +1,15 @@
 package CloudFlare::Client::Exception::Upstream;
 # ABSTRACT: Upstream CloudFlare API Exception
 
-use Modern::Perl '2012';
-use autodie ':all';
+use Modern::Perl qw( 2012);
+use autodie      qw( :all);
 use namespace::autoclean;
 
 use Readonly;
 use Moo; use MooX::StrictConstructor;
-use CloudFlare::Client::Types 'ErrorCode';
+use CloudFlare::Client::Types qw( ErrorCode);
 
-our $VERSION = '0.03_6'; # TRIAL VERSION
+our $VERSION = '0.03_7'; # TRIAL VERSION
 
 extends 'Throwable::Error';
 
@@ -31,7 +31,7 @@ CloudFlare::Client::Exception::Upstream - Upstream CloudFlare API Exception
 
 =head1 VERSION
 
-version 0.03_6
+version 0.03_7
 
 =head1 SYNOPSIS
 
