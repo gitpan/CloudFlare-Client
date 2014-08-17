@@ -35,6 +35,7 @@ sub _buildUa {
     $ua->map_response(qr{www.cloudflare.com/api_json.html},
                       $CNT_RSP);
     $ua}
+__PACKAGE__->meta->make_immutable;
 
 # Catch potential failure
 Readonly my $API => try {

@@ -39,14 +39,13 @@ my %WriteMakefileArgs = (
   "TEST_REQUIRES" => {
     "File::Spec" => "3.40",
     "HTTP::Response" => "6.00",
-    "LWP::Simple" => "6.00",
     "Test::Exception" => "0.32",
     "Test::LWP::UserAgent" => "0.002",
     "Test::Moose" => "1.22",
     "Test::TypeTiny" => "0.001",
     "Try::Tiny" => "0.11"
   },
-  "VERSION" => "0.03_7",
+  "VERSION" => "0.03_8",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -60,7 +59,6 @@ my %FallbackPrereqs = (
   "JSON::Any" => "1.26",
   "Kavorka" => "0.001",
   "LWP::Protocol::https" => "6.02",
-  "LWP::Simple" => "6.00",
   "LWP::UserAgent" => "6.02",
   "Modern::Perl" => "1.20120105",
   "Moo" => "0.009005",

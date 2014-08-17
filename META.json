@@ -4,7 +4,7 @@
       "Peter Roberts <me+dev@peter-r.co.uk>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 5.020, CPAN::Meta::Converter version 2.140640",
+   "generated_by" : "Dist::Zilla version 5.020, CPAN::Meta::Converter version 2.142060",
    "license" : [
       "mit"
    ],
@@ -19,7 +19,7 @@
             "Pod::Coverage::TrustPod" : "0",
             "Test::CPAN::Changes" : "0.19",
             "Test::CPAN::Meta" : "0",
-            "Test::Kwalitee" : "1.12",
+            "Test::Kwalitee" : "1.21",
             "Test::More" : "0",
             "Test::NoTabs" : "0",
             "Test::Pod" : "1.41",
@@ -53,7 +53,6 @@
          "requires" : {
             "File::Spec" : "3.40",
             "HTTP::Response" : "6.00",
-            "LWP::Simple" : "6.00",
             "Test::Exception" : "0.32",
             "Test::LWP::UserAgent" : "0.002",
             "Test::Moose" : "1.22",
@@ -66,19 +65,19 @@
    "provides" : {
       "CloudFlare::Client" : {
          "file" : "lib/CloudFlare/Client.pm",
-         "version" : "0.03_7"
+         "version" : "0.03_8"
       },
       "CloudFlare::Client::Exception::Connection" : {
          "file" : "lib/CloudFlare/Client/Exception/Connection.pm",
-         "version" : "0.03_7"
+         "version" : "0.03_8"
       },
       "CloudFlare::Client::Exception::Upstream" : {
          "file" : "lib/CloudFlare/Client/Exception/Upstream.pm",
-         "version" : "0.03_7"
+         "version" : "0.03_8"
       },
       "CloudFlare::Client::Types" : {
          "file" : "lib/CloudFlare/Client/Types.pm",
-         "version" : "0.03_7"
+         "version" : "0.03_8"
       }
    },
    "release_status" : "testing",
@@ -88,6 +87,6 @@
          "web" : "http://rt.cpan.org/Public/Dist/Display.html?Name=CloudFlare-Client"
       }
    },
-   "version" : "0.03_7"
+   "version" : "0.03_8"
 }
 

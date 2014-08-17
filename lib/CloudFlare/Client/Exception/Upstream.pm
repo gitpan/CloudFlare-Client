@@ -1,15 +1,15 @@
 package CloudFlare::Client::Exception::Upstream;
 # ABSTRACT: Upstream CloudFlare API Exception
 
-use Modern::Perl qw( 2012);
-use autodie      qw( :all);
+use Modern::Perl '2012';
+use autodie      ':all';
 use namespace::autoclean;
 
 use Readonly;
 use Moo; use MooX::StrictConstructor;
-use CloudFlare::Client::Types qw( ErrorCode);
+use CloudFlare::Client::Types 'ErrorCode';
 
-our $VERSION = '0.03_7'; # TRIAL VERSION
+our $VERSION = '0.03_8'; # TRIAL VERSION
 
 extends 'Throwable::Error';
 
@@ -17,6 +17,7 @@ has errorCode => (
     is       => 'ro',
     isa      => ErrorCode);
 
+__PACKAGE__->meta->make_immutable;
 1; # End of CloudFlare::Client::Exception::Upstream
 
 __END__
@@ -31,7 +32,7 @@ CloudFlare::Client::Exception::Upstream - Upstream CloudFlare API Exception
 
 =head1 VERSION
 
-version 0.03_7
+version 0.03_8
 
 =head1 SYNOPSIS
 

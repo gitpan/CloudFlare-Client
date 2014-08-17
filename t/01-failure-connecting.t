@@ -23,6 +23,7 @@ extends 'CloudFlare::Client';
 # Override the real user agent with a mocked one
 # It will always fail to connect
 sub _buildUa { Test::LWP::UserAgent::->new }
+__PACKAGE__->meta->make_immutable;
 
 # Test upstream failures
 # Catch potential failure

@@ -1,5 +1,10 @@
 Revision history for CloudFlare-Client
 
+0.03_8    2014-08-17
+ - Make upstream test an author test and remove guards
+ - Tidy imports
+ - Immutiblise
+
 0.03_7    2014-08-16
  - Moo -> Moose because CPAN tests are still failing
 

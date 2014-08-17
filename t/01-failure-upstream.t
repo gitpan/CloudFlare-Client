@@ -38,6 +38,7 @@ sub _buildUa {
     Readonly my $ua => Test::LWP::UserAgent::->new;
     $ua->map_response(qr{www.cloudflare.com/api_json.html}, $RSP);
     $ua}
+__PACKAGE__->meta->make_immutable;
 
 # Test upstream failures
 # Catch potential failure
