@@ -3,13 +3,14 @@ package CloudFlare::Client::Exception::Upstream;
 
 use Modern::Perl '2012';
 use autodie      ':all';
+no  indirect     'fatal';
 use namespace::autoclean;
 
 use Readonly;
 use Moo; use MooX::StrictConstructor;
 use CloudFlare::Client::Types 'ErrorCode';
 
-our $VERSION = '0.03_8'; # TRIAL VERSION
+our $VERSION = '0.03_9'; # TRIAL VERSION
 
 extends 'Throwable::Error';
 
@@ -32,7 +33,7 @@ CloudFlare::Client::Exception::Upstream - Upstream CloudFlare API Exception
 
 =head1 VERSION
 
-version 0.03_8
+version 0.03_9
 
 =head1 SYNOPSIS
 

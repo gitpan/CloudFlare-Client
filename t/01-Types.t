@@ -1,5 +1,7 @@
 #!perl -T
 use Modern::Perl '2012';
+use autodie      ':all';
+no  indirect     'fatal';
 
 use Test::More;
 use Test::TypeTiny;

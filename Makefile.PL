@@ -29,23 +29,22 @@ my %WriteMakefileArgs = (
     "Moose" => "1.22",
     "MooseX::StrictConstructor" => "0.13",
     "Readonly" => "1.04",
-    "Throwable::Error" => "0.200003",
-    "Type::Library" => "0.008",
-    "Type::Utils" => "0.039_12",
-    "Types::Standard" => "0.001",
+    "Throwable" => "0.200003",
+    "Type::Tiny" => "0.039_12",
     "autodie" => "2.11",
+    "indirect" => "0.24",
     "namespace::autoclean" => "0.12"
   },
   "TEST_REQUIRES" => {
     "File::Spec" => "3.40",
-    "HTTP::Response" => "6.00",
+    "HTTP::Message" => "6.00",
+    "Moose" => "1.22",
     "Test::Exception" => "0.32",
     "Test::LWP::UserAgent" => "0.002",
-    "Test::Moose" => "1.22",
-    "Test::TypeTiny" => "0.001",
-    "Try::Tiny" => "0.11"
+    "Try::Tiny" => "0.11",
+    "Type::Tiny" => "0.039_12"
   },
-  "VERSION" => "0.03_8",
+  "VERSION" => "0.03_9",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -54,7 +53,7 @@ my %WriteMakefileArgs = (
 
 my %FallbackPrereqs = (
   "File::Spec" => "3.40",
-  "HTTP::Response" => "6.00",
+  "HTTP::Message" => "6.00",
   "IPC::System::Simple" => "1.22",
   "JSON::Any" => "1.26",
   "Kavorka" => "0.001",
@@ -68,14 +67,11 @@ my %FallbackPrereqs = (
   "Readonly" => "1.04",
   "Test::Exception" => "0.32",
   "Test::LWP::UserAgent" => "0.002",
-  "Test::Moose" => "1.22",
-  "Test::TypeTiny" => "0.001",
-  "Throwable::Error" => "0.200003",
+  "Throwable" => "0.200003",
   "Try::Tiny" => "0.11",
-  "Type::Library" => "0.008",
-  "Type::Utils" => "0.039_12",
-  "Types::Standard" => "0.001",
+  "Type::Tiny" => "0.039_12",
   "autodie" => "2.11",
+  "indirect" => "0.24",
   "namespace::autoclean" => "0.12"
 );
 

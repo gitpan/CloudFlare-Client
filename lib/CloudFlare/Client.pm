@@ -3,6 +3,7 @@ package CloudFlare::Client;
 
 use Modern::Perl '2012';
 use autodie      ':all';
+no  indirect     'fatal';
 use namespace::autoclean;
 
 use Readonly;
@@ -18,9 +19,9 @@ use LWP::UserAgent       6.02;
 use LWP::Protocol::https 6.02;
 use JSON::Any;
 
-our $VERSION = '0.03_8'; # TRIAL VERSION
+our $VERSION = '0.03_9'; # TRIAL VERSION
 
-# Cloudflare credentials
+# CF credentials
 has '_user' => (
     is       => 'ro',
     isa      => Str,
@@ -43,7 +44,7 @@ has '_ua' => (
     init_arg => undef,
     builder  => '_buildUa');
 
-# private methods
+# Calls through to the CF API, can throw exceptions under ::Exception::
 Readonly my $CF_URL =>
     'https://www.cloudflare.com/api_json.html';
 method _apiCall($act is ro, %args is ro) {
@@ -172,7 +173,7 @@ CloudFlare::Client - Object Orientated Interface to CloudFlare client API
 
 =head1 VERSION
 
-version 0.03_8
+version 0.03_9
 
 =head1 SYNOPSIS
 
@@ -193,27 +194,11 @@ in as a hash with keys as given in the docs
 
 Successful API calls return the response section from the upstream JSON API. Failures for whatever reason throw exceptions under the CloudFlare::Client::Exception:: namespace
 
-=head1 ATTRIBUTES
-
-=head2 _user
-
-CF user name (email) used to access the API. Set using the
-user argument to the constructor. Readonly.
-
-=head2 _key
-
-CF API key, set using the apikey argument to the constructor.
-Readonly
-
-=head2 _ua
-
-UserAgent object used to make API calls, set internally. Readonly
-
 =head1 METHODS
 
 =head2 new
 
-Construct a new CloudFlare::Client API object
+Construct a new API object
 
     my $api = CloudFlare::Client::->new(
         user   => $CF_USER,
@@ -313,22 +298,6 @@ Construct a new CloudFlare::Client API object
 
     $api->recDelete($zone, $recordId)
 
-=head2 _apiCall
-
-Makes a call through to the CF API, via HTTPS POST
-
-    $api->_makeCall($action, %args)
-
-If the HTTPS connection fails this can throw a
-L<CloudFlare::Client::Exception::Connection>. If the CF API itself
-gives an error then it can throw a
-L<CloudFlare::Client::Exception::Upstream>
-
-=head2 _wlBanNul
-
-Used to aggregrate a number of CF calls with a single signature into
-one function
-
 =for test_synopsis my ($CF_USER, $CF_KEY);
 
 =head1 BUGS
@@ -337,49 +306,7 @@ Please report any bugs or feature requests to C<bug-cloudflare-client
 at rt.cpan.org>, or through the web interface at
 L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=CloudFlare-Client>.
 I will be notified, and then you'll automatically be notified of
-progress on your bug as I make changes.
-
-=head1 SUPPORT
-
-You can find documentation for this module with the perldoc command.
-
-    perldoc CloudFlare::Client
-
-You can also look for information at:
-
-=over 4
-
-=item *
-
-DDFlare
-
-L<https://bitbucket.org/pwr22/ddflare>
-
-=item *
-
-RT: CPAN's request tracker (report bugs here)
-
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=CloudFlare-Client>
-
-=item *
-
-AnnoCPAN: Annotated CPAN documentation
-
-L<http://annocpan.org/dist/CloudFlare-Client>
-
-=item *
-
-CPAN Ratings
-
-L<http://cpanratings.perl.org/d/CloudFlare-Client>
-
-=item *
-
-Search CPAN
-
-L<http://search.cpan.org/dist/CloudFlare-Client/>
-
-=back
+progress on your bug as I make changes
 
 =head1 ACKNOWLEDGEMENTS
 

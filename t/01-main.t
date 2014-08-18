@@ -2,7 +2,8 @@
 
 # Aims to test basic usage of CloudFlare::Client
 use Modern::Perl '2012';
-use autodie ':all';
+use autodie      ':all';
+no  indirect     'fatal';
 
 use Readonly;
 use Try::Tiny;

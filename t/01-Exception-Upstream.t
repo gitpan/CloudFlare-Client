@@ -1,6 +1,7 @@
 #!perl -T
 use Modern::Perl '2012';
-use autodie ':all';
+use autodie      ':all';
+no  indirect     'fatal';
 
 use Readonly;
 use Test::More;

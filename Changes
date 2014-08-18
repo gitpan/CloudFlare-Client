@@ -1,5 +1,12 @@
 Revision history for CloudFlare-Client
 
+0.03_9    2014-08-18
+ - Reinstate more liberal dep pruning
+ - Trim more cruft from pod
+ - Add homepage to meta
+ - Add no indirect 'fatal'
+ - Add git meta correctly
+
 0.03_8    2014-08-17
  - Make upstream test an author test and remove guards
  - Tidy imports

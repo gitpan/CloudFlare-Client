@@ -4,12 +4,12 @@ author:
   - 'Peter Roberts <me+dev@peter-r.co.uk>'
 build_requires:
   File::Spec: '3.40'
-  HTTP::Response: '6.00'
+  HTTP::Message: '6.00'
+  Moose: '1.22'
   Test::Exception: '0.32'
   Test::LWP::UserAgent: '0.002'
-  Test::Moose: '1.22'
-  Test::TypeTiny: '0.001'
   Try::Tiny: '0.11'
+  Type::Tiny: 0.039_12
   perl: '5.014'
 dynamic_config: 0
 generated_by: 'Dist::Zilla version 5.020, CPAN::Meta::Converter version 2.142060'
@@ -21,16 +21,16 @@ name: CloudFlare-Client
 provides:
   CloudFlare::Client:
     file: lib/CloudFlare/Client.pm
-    version: 0.03_8
+    version: 0.03_9
   CloudFlare::Client::Exception::Connection:
     file: lib/CloudFlare/Client/Exception/Connection.pm
-    version: 0.03_8
+    version: 0.03_9
   CloudFlare::Client::Exception::Upstream:
     file: lib/CloudFlare/Client/Exception/Upstream.pm
-    version: 0.03_8
+    version: 0.03_9
   CloudFlare::Client::Types:
     file: lib/CloudFlare/Client/Types.pm
-    version: 0.03_8
+    version: 0.03_9
 requires:
   IPC::System::Simple: '1.22'
   JSON::Any: '1.26'
@@ -43,13 +43,14 @@ requires:
   Moose: '1.22'
   MooseX::StrictConstructor: '0.13'
   Readonly: '1.04'
-  Throwable::Error: '0.200003'
-  Type::Library: '0.008'
-  Type::Utils: 0.039_12
-  Types::Standard: '0.001'
+  Throwable: '0.200003'
+  Type::Tiny: 0.039_12
   autodie: '2.11'
+  indirect: '0.24'
   namespace::autoclean: '0.12'
   perl: '5.014'
 resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=CloudFlare-Client
-version: 0.03_8
+  homepage: https://bitbucket.org/pwr22/ddflare
+  repository: git://git@bitbucket.org:pwr22/ddflare.git
+version: 0.03_9

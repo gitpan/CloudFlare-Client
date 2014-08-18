@@ -4,7 +4,8 @@
 package CloudFlare::Client::Test;
 
 use Modern::Perl '2012';
-use autodie ':all';
+use autodie      ':all';
+no  indirect     'fatal';
 
 use namespace::autoclean;
 use Readonly;

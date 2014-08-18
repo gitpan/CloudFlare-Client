@@ -4,8 +4,9 @@
 # connection cannot be made
 package CloudFlare::Client::Test;
 
-use Modern::Perl qw( 2012);
-use autodie      qw( :all);
+use Modern::Perl '2012';
+use autodie      ':all';
+no  indirect     'fatal';
 
 use namespace::autoclean;
 use Readonly;

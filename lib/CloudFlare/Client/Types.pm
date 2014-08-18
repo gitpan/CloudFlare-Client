@@ -3,6 +3,7 @@ package CloudFlare::Client::Types;
 
 use Modern::Perl '2012';
 use autodie      ':all';
+no  indirect     'fatal';
 use namespace::autoclean;
 
 use Type::Library -base, -declare => qw( CFCode ErrorCode);
@@ -11,7 +12,7 @@ use Type::Utils 0.039_12 -all;
 use Types::Standard qw( Enum Maybe);
 use Readonly;
 
-our $VERSION = '0.03_8'; # TRIAL VERSION
+our $VERSION = '0.03_9'; # TRIAL VERSION
 
 class_type 'LWP::UserAgent';
 declare CFCode, as Enum[qw( E_UNAUTH E_INVLDINPUT E_MAXAPI)];
@@ -31,7 +32,7 @@ CloudFlare::Client::Types - Types for Cloudflare::Client
 
 =head1 VERSION
 
-version 0.03_8
+version 0.03_9
 
 =head1 SYNOPSIS
 

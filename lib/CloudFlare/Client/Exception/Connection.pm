@@ -3,13 +3,14 @@ package CloudFlare::Client::Exception::Connection;
 
 use Modern::Perl '2012';
 use autodie      ':all';
+no  indirect     'fatal';
 use namespace::autoclean;
 
 use Readonly;
 use Moose; use MooseX::StrictConstructor;
 use Types::Standard 'Str';
 
-our $VERSION = '0.03_8'; # TRIAL VERSION
+our $VERSION = '0.03_9'; # TRIAL VERSION
 
 extends 'Throwable::Error';
 
@@ -33,7 +34,7 @@ CloudFlare::Client::Exception::Connection - CloudFlare API Connection Exception
 
 =head1 VERSION
 
-version 0.03_8
+version 0.03_9
 
 =head1 SYNOPSIS
 
