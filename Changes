@@ -1,5 +1,8 @@
 Revision history for CloudFlare-Client
 
+0.04      2014-08-26
+ - Bump to stable
+
 0.03_9    2014-08-18
  - Reinstate more liberal dep pruning
  - Trim more cruft from pod

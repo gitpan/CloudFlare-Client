@@ -64,22 +64,22 @@
    "provides" : {
       "CloudFlare::Client" : {
          "file" : "lib/CloudFlare/Client.pm",
-         "version" : "0.03_9"
+         "version" : "0.04"
       },
       "CloudFlare::Client::Exception::Connection" : {
          "file" : "lib/CloudFlare/Client/Exception/Connection.pm",
-         "version" : "0.03_9"
+         "version" : "0.04"
       },
       "CloudFlare::Client::Exception::Upstream" : {
          "file" : "lib/CloudFlare/Client/Exception/Upstream.pm",
-         "version" : "0.03_9"
+         "version" : "0.04"
       },
       "CloudFlare::Client::Types" : {
          "file" : "lib/CloudFlare/Client/Types.pm",
-         "version" : "0.03_9"
+         "version" : "0.04"
       }
    },
-   "release_status" : "testing",
+   "release_status" : "stable",
    "resources" : {
       "bugtracker" : {
          "mailto" : "bug-cloudflare-client at rt.cpan.org",
@@ -92,6 +92,6 @@
          "web" : "https://bitbucket.org/pwr22/ddflare"
       }
    },
-   "version" : "0.03_9"
+   "version" : "0.04"
 }
 
